@@ -1,0 +1,11 @@
+*.vsix
+.DS_Store
+Thumbs.db
+
+# IDE / local config — never commit
+.cursor/
+
+# Local secrets — never commit
+.env.local
+.env*.local
+.git-credentials
