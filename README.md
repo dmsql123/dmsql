@@ -2,7 +2,10 @@
 
 面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL / MariaDB、Oracle、PostgreSQL、SQLite、ClickHouse、Doris、达梦 (Dameng)、Hive** 等 8 种数据库。纯本地运行，隐私安全无遥测，密码采用 SecretStorage 加密存储。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
 
-**问题反馈 / 功能需求**：请到 GitHub 提交 [Issue](https://github.com/dmsql123/dmsql/issues)（本仓库用于文档与反馈，不公开源码）。
+- **官网**：[https://dmsql.top](https://dmsql.top)
+- **操作文档**：[https://dmsql.top/docs](https://dmsql.top/docs)
+- **English docs**: [https://dmsql.top/docs?lang=en](https://dmsql.top/docs?lang=en)
+- **问题反馈 / 功能需求**：请到 GitHub 提交 [Issue](https://github.com/dmsql123/dmsql/issues)
 
 ---
 
@@ -19,8 +22,6 @@
 
 ---
 
-
-
 ## 快速开始
 
 1. 点击左侧活动栏的 **DMSQL** 图标打开数据库浏览器。
@@ -35,16 +36,14 @@
 
 遇到 Bug 或希望增加功能，请到 GitHub 仓库提交 Issue，**不要**在其他渠道重复提交。
 
-- 提交入口：<https://github.com/dmsql123/dmsql/issues/new/choose>
-- 仓库地址：<https://github.com/dmsql123/dmsql>
+- 提交入口：[https://github.com/dmsql123/dmsql/issues/new/choose](https://github.com/dmsql123/dmsql/issues/new/choose)
+- 仓库地址：[https://github.com/dmsql123/dmsql](https://github.com/dmsql123/dmsql)
 - **Bug**：请选择 Bug 模板，写明 IDE（VS Code / Cursor / Windsurf / Trae 等）、扩展版本、数据库类型，以及可复现步骤。
 - **需求**：请选择 Feature 模板，写明使用场景和期望行为。
 
-本 GitHub 仓库仅提供文档、发布说明与问题跟踪，**不包含源代码**。
+完整操作文档请看官网 [https://dmsql.top/docs](https://dmsql.top/docs)（[English docs](https://dmsql.top/docs?lang=en)）。本 GitHub 仓库仅提供发布说明与问题跟踪，**不包含源代码**。
 
 ---
-
-
 
 ## 数据库浏览器 (Explorer)
 
@@ -58,8 +57,6 @@
 
 ---
 
-
-
 ## 可视化表结构设计器 (Table Designer)
 
 - **可视化建表/改表**：图形化编辑字段名、数据类型、长度/精度、Null 可空、默认值与列注释。
@@ -69,8 +66,6 @@
 - **DDL 预检与执行**：修改完成后自动对比差异生成准确的 `CREATE TABLE` 或 `ALTER TABLE` DDL 代码，确认后一键应用。
 
 ---
-
-
 
 ## SQL 编辑器与智能辅助
 
@@ -85,8 +80,6 @@
 
 ---
 
-
-
 ## 结果面板 (Result View)
 
 - **高性能 AG Grid**：支持排序、多列筛选、自适应列宽、物理服务端分页 (`pageSize`) 与按需懒加载。
@@ -100,8 +93,6 @@
 
 ---
 
-
-
 ## 数据导入与跨库迁移
 
 - **多格式本地文件导入**：支持导入 CSV、XLSX、JSON、SQL 文件，智能自动解析文件首行列头。
@@ -111,8 +102,6 @@
 
 ---
 
-
-
 ## 智能模拟数据生成器 (Mock Data)
 
 - **语义推断与 Faker 规则**：根据列名与字段类型自动匹配 Faker 规则，覆盖 42+ 内置语义类型（如姓名、身份证、手机号、公司、地址、IP、金额、日期等）。
@@ -121,8 +110,6 @@
 - **安全分批写入**：支持配置每批插入条数及硬上限保护 (最高 10,000 条)。
 
 ---
-
-
 
 ## 实时监控与历史审计
 
