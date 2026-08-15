@@ -1,6 +1,6 @@
 # DMSQL **- Database Manager SQL Tool**
 
-面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL / MariaDB、Oracle、PostgreSQL、SQLite、ClickHouse、Doris、达梦 (Dameng)、Hive** 等 8 种数据库。纯本地运行，隐私安全无遥测，密码采用 SecretStorage 加密存储。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
+面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL、MariaDB、Oracle、PostgreSQL、人大金仓、GaussDB、openGauss、SQL Server、SQLite、DuckDB、ClickHouse、Doris、达梦 (Dameng)、Hive** 等 14 种数据库。纯本地运行，隐私安全无遥测，密码采用 SecretStorage 加密存储。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
 
 - **官网**：[https://dmsql.top](https://dmsql.top)
 - **操作文档**：[https://dmsql.top/docs](https://dmsql.top/docs)
@@ -11,7 +11,7 @@
 
 ## 核心亮点
 
-- **多数据库支持**：支持 MySQL/MariaDB、Oracle、PostgreSQL、SQLite、ClickHouse、Doris、达梦 (Dameng)、Hive。
+- **多数据库支持**：支持 MySQL、MariaDB、Oracle、PostgreSQL、人大金仓、GaussDB、openGauss、SQL Server、SQLite、DuckDB、ClickHouse、Doris、达梦 (Dameng)、Hive。
 - **纯本地安全**：零云端依赖，密码通过 VS Code SecretStorage 硬件/系统级安全加密。
 - **可视化表结构设计器**：支持可视化新建/修改表结构，字段类型、主键、自增、索引、外键约束一站式图形化配置与 DDL 预检。
 - **智能模拟数据生成器**：支持基于字段语义的 Faker 模拟数据生成（42+ 内置语义类型），并支持配置 OpenAI/DeepSeek 协议通过 AI 生成逼真测试数据。

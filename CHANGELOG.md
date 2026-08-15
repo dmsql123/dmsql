@@ -4,6 +4,13 @@
 
 ---
 
+## [0.6.0] - 2026-08-15
+
+### 新增
+
+- 新建连接支持 MariaDB、人大金仓、GaussDB、openGauss、SQL Server、DuckDB。
+- 新建连接图库支持收藏常用库（默认 MySQL / Oracle / ClickHouse），全部库可按关系型 / 分析型 / 文件库 / 大数据分组浏览。
+
 ## [0.5.1] - 2026-08-14
 
 ### 修复
