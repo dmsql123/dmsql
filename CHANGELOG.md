@@ -4,6 +4,33 @@
 
 ---
 
+## [0.7.0] - 2026-08-28
+
+### 新增
+
+- Oracle / 达梦资源树增加 Packages：查看包头与包体、展开包内成员、编译与删除；分组上可生成包模板。
+- PostgreSQL / 人大金仓 / GaussDB / openGauss：物化视图单独分组；序列分组在系统表不可用时自动隐藏。
+- DuckDB 连接可直接打开 Parquet / CSV 并生成查询。
+- Redis：检视 Hash / ZSet；可为 Key 设置 TTL、持久化、删除，以及修改 Hash 字段。
+- SQL 编辑器右键「解释」：对当前语句执行方言 EXPLAIN，并以表格显示（Redis 不可用）。
+- 单元格检视支持 JSON 折叠树与十六进制查看。
+- PostgreSQL 监控页只读列出已安装扩展。
+- Doris 表详情显示数据模型与分桶；ClickHouse 表详情显示 parts 汇总。
+- SQL Server 导入可选 IDENTITY_INSERT。
+- 表右键 ANALYZE（PostgreSQL / 人大金仓 / GaussDB / openGauss）/ OPTIMIZE（MySQL / MariaDB），执行前需确认。
+
+### 改进
+
+- 资源树展开默认显示表的预估行数和大小，可在设置中关闭以加快大库展开。
+- 只读连接以及 Hive、Redis 不再出现截断等不适用的菜单。
+- 连接心跳失败后，下次执行会自动重连；查询支持取消。
+- 编辑器中建表、改表、删表等成功后，自动刷新对应库的资源树。
+- 分页结果导出 CSV 改为流式写出，大结果集更稳。
+- ClickHouse 表节点显示引擎名。
+- Oracle / 达梦：过程运行改为 CALL；成功后在独立结果页显示 DBMS_OUTPUT。
+- Trino 执行通知显示查询进度，并支持取消正在执行的查询。
+- 从资源树生成 SQL 或打开新编辑器时，自动绑定对应连接，不再落到当前活动库。
+
 ## [0.6.9] - 2026-08-27
 
 ### 改进
