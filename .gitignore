@@ -9,3 +9,9 @@ Thumbs.db
 .env.local
 .env*.local
 .git-credentials
+
+# Local release scripts
+publish_release.py
+publish_release.ps1
+release.py
+
