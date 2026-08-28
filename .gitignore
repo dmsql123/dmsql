@@ -11,7 +11,8 @@ Thumbs.db
 .git-credentials
 
 # Local release scripts
-publish_release.py
-publish_release.ps1
+publish_*.py
+publish_*.ps1
 release.py
+
 
