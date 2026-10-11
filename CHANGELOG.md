@@ -1,12 +1,39 @@
-# 更新日志 (Change Log)
+# Change Log (更新日志)
 
-本文档记录 DMSQL 的重大版本变更与新特性。
+This document logs significant changes, new features, and bug fixes for DMSQL.  
+本文档记录 DMSQL 的重大版本变更、新特性与缺陷修复。
 
-如果您在使用过程中遇到任何问题、异常 Bug，或有新的功能需求与改进建议，欢迎随时前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈，我们将持续跟进并优化迭代！
+If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).  
+如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！
 
 ---
 
+## [0.8.27] - 2026-10-11
+
+### Improvements & Enhancements
+
+- **Resource Tree Child Node Cleanup**: Cleaned up invalid and redundant action icons and context menus on table child nodes.
+- **Accurate Index Count in Resource Tree**: Index count badges on resource tree nodes now accurately reflect the real index list count across all databases, including secondary and composite indexes.
+
+---
+
+### 改进与优化
+
+- **资源树子节点操作净化**：全面清理数据表子节点无效冗余操作图标以及右键菜单。
+- **资源树索引计数准确度提升**：资源树索引节点数量统一改为读取各库实际索引列表统计，准确反映二级索引及复合索引数量。
+
 ## [0.8.26] - 2026-10-10
+
+### Features & Improvements
+
+- **Pivot Mode Usability & Export**: Refined pivot mode interactions to prevent interference with basic data querying, and added support for exporting pivot table results directly.
+- **Resource Tree Row Count & Cache Polish**: Optimized table row count calculation and session caching mechanisms for improved accuracy and performance.
+
+### Bug Fixes
+
+- **Pivot Aggregation with Filter Fix**: Fixed incorrect summary aggregation in pivot mode when data filtering is applied.
+
+---
 
 ### 新特性与改进
 
@@ -19,11 +46,23 @@
 
 ## [0.8.25] - 2026-10-09
 
+### Improvements & Enhancements
+
+- **Result Grid Header & Table Preview Polish**: Refined result grid header bar with dynamic SQL preview (truncated with hover tooltip) and connection info, and streamlined table preview titles and duration display.
+
+---
+
 ### 改进与优化
 
 - **结果集顶部栏与表数据预览标题优化**：优化结果集顶部栏信息排版，左侧动态显示当前 SQL（超长省略，悬停查看全文），右侧统一标注连接与数据库；精简表数据预览标题及耗时呈现。
 
 ## [0.8.24] - 2026-10-08
+
+### Features & Improvements
+
+- **Dynamic SQL Variable Binding**: Added support for `${variable}` placeholders in SQL queries, prompting for variable values before executing the SQL.
+
+---
 
 ### 新特性与改进
 
@@ -31,11 +70,24 @@
 
 ## [0.8.23] - 2026-10-08
 
+### Improvements & Enhancements
+
+- Refined result grid row hover highlight synchronization and expand arrow visuals.
+
+---
+
 ### 改进与优化
 
 - 优化结果网格行悬停联动高亮与展开箭头视觉细节。
 
 ## [0.8.22] - 2026-10-07
+
+### Features & Improvements
+
+- Refined grid display.
+- Added "Expand Height" setting (`dmsql.grid.expandHeight`, default 0 for unlimited) to allow configuring a max height cap for expanded rows.
+
+---
 
 ### 新特性与改进
 
@@ -43,6 +95,17 @@
 - 新增设置项「展开高度」（`dmsql.grid.expandHeight`，默认 0 不限高），支持自定义详情最大高度上限。
 
 ## [0.8.21] - 2026-10-06
+
+### Features & Improvements
+
+- **Offline Driver Guidance**: Added offline driver installation instructions and documentation links to the connection form for restricted/intranet environments.
+- **View Header Usability**: Made action buttons in the Database Explorer header persistently visible for quicker access.
+
+### Bug Fixes
+
+- **Connection Status Notification**: Fixed duplicate "Connecting..." notifications when reconnecting.
+
+---
 
 ### 新特性与改进
 
@@ -55,11 +118,30 @@
 
 ## [0.8.20] - 2026-09-30
 
+### Bug Fixes & Improvements
+
+- **Dameng (DM) Connection Stability**: Enhanced idle heartbeat keep-alive and improved session cleanup, resolving idle timeout disconnections and reconnection failures.
+
+---
+
 ### 修复与优化
 
 - **达梦 (DM) 数据库连接优化**：增强空闲连接心跳保活，优化断开会话的及时释放与回收，解决闲置超时断开及后续重连失败的问题。
 
 ## [0.8.19] - 2026-09-30
+
+### Bug Fixes
+
+- **[Critical Fix] Dameng (DM) Table DDL Hanging & Instance Lockup**: Completely removed calls to `DBMS_METADATA.GET_DDL`, eliminating a critical issue where certain Dameng database instances would hang or freeze (requiring a service restart) during DDL generation; now safely retrieves table definitions via system procedures and metadata views.
+- **Table Details Panel Lifecycle & Tab Interaction Bug Fixes**:
+  - Fixed an issue where reopening Table Details or Performance Monitoring panels failed after closing (corrected disposal order and cache invalidation);
+  - Fixed tab switching so clicking "View Table DDL" or "Table Details" seamlessly jumps to and activates the target tab when the panel is already open (unified Dameng and Hive tab handling).
+
+### Improvements & Enhancements
+
+- **Table Details UI Layout Polish**: Enforced single-line rendering for Primary Key (PK) badges, preventing awkward wraps on narrow columns and improving field readability.
+
+---
 
 ### 修复
 
@@ -74,6 +156,17 @@
 
 ## [0.8.18] - 2026-09-30
 
+### Features & Improvements
+
+- **SQL Editor Custom Column Comments**: Added "Custom Column Comments" to the editor context menu to insert/refresh `/* @columns */` annotations above queries; defined comments display below column headers in the grid and override database comments (wildcards excluded).
+- **Result Grid Column Width & Comment Truncation**: Header comments no longer stretch default column widths; column width automatically fits column names and data, with long comments cleanly truncated and full text viewable on hover.
+
+### Bug Fixes
+
+- **Dameng (DM) Driver safer-buffer Dependency Fix**: Included missing `safer-buffer` dependency in Dameng driver downloads, resolving an issue where the driver was marked ready but connection tests reported it missing; automatically repairs existing installations during connection test. (#1)
+
+---
+
 ### 新特性与改进
 
 - **SQL 编辑器自定义列注释**：SQL 编辑器右键菜单新增「自定义列注释」命令，自动在查询语句上方生成/更新 `/* @columns */` 注释块；执行后自定义注释将显示在网格列名下方并覆盖数据库默认注释（自动排除通配符）。
@@ -85,11 +178,27 @@
 
 ## [0.8.17] - 2026-09-30
 
+### Improvements & Enhancements
+
+- Refined grid display details.
+
+---
+
 ### 改进与优化
 
 - 优化网格显示细节。
 
 ## [0.8.16] - 2026-09-30
+
+### Improvements & Enhancements
+
+- **Result Grid Multi-Condition WHERE Filter Upgrade**:
+  - Upgraded toolbar WHERE filtering with a multi-condition list: use "+" to collect clauses into the list, with flexible AND / OR toggles on subsequent items;
+  - Supports typing conditions prefixed with `and ` or `or ` to automatically assign logical connectors; allows quick round-trip editing by restoring items back to the input box;
+  - Supports drag-and-drop reordering of filter conditions with automatic connector adjustments; pressing Enter or clicking Run automatically collects input and executes;
+  - Filter counter badges now persist cleanly only while filtering is active.
+
+---
 
 ### 改进与优化
 
@@ -100,6 +209,20 @@
   - 工具栏筛选徽标仅在条件生效时常驻展示筛选计数，视觉更清爽。
 
 ## [0.8.15] - 2026-09-29
+
+### Bug Fixes
+
+- **Grid Selection Exclusivity & Cleanup**:
+  - Fixed conflicting selection states between cell range, row, column, and select-all modes; selecting cells now clears row/column selections, while selecting row/column headers removes cell ranges and drag handles; Esc, sorting, or clicking outside/blank areas clears selections;
+  - Fixed corner select-all toggle interaction (clicking when fully selected now deselects), and right-clicking an unselected cell correctly focuses it.
+- **Inline Cell Editing Constraints & Focus**:
+  - Restricted inline editing strictly to table data browsing and single-table SELECT statements, rejecting multi-table joins;
+  - Fixed cell selection overlays obstructing the active editor upon double-click, and prevented unexpected focus loss upon mouse release.
+- **Dirty State Indicator & Undo/Redo Granularity**:
+  - Refined toolbar save button indicator for unsaved changes by highlighting the icon and displaying change counts within tooltips;
+  - Fixed cells failing to revert to original values upon undo, and corrected undo/redo granularity to single-step history instead of wiping all unsaved changes simultaneously.
+
+---
 
 ### 修复
 
@@ -115,6 +238,16 @@
 
 ## [0.8.14] - 2026-09-28
 
+### Improvements & Enhancements
+
+- Aligned column sort arrow colors with filter icons in result grids.
+
+### Bug Fixes
+
+- Fixed cell selection background colors not applying to alternating light rows under custom themes.
+
+---
+
 ### 改进与优化
 
 - 优化结果网格列头排序箭头与筛选图标视觉颜色对齐。
@@ -125,6 +258,16 @@
 
 ## [0.8.13] - 2026-09-28
 
+### Improvements & Enhancements
+
+- Aligned grid selections and cell range handles with host badge themes (Trae, CodeBuddy, Cursor), and refined connection view styling.
+
+### Bug Fixes
+
+- Fixed unreadable dropdown text in dark mock data views and improved sort arrow contrast under specific host themes.
+
+---
+
 ### 改进与优化
 
 - 结果网格全面对齐各宿主（Trae/CodeBuddy/Cursor）角标选中主题色与单元格选区手柄，优化新建连接浅色视觉层次。
@@ -134,6 +277,20 @@
 - 修复深色主题下模拟数据下拉菜单文字看不清及部分主题下排序箭头对比度不足的问题。
 
 ## [0.8.12] - 2026-09-27
+
+### Improvements & Enhancements
+
+- **Quick Enclosed SQL Block Selection**:
+  - Double-clicking immediately after an opening parenthesis or adjacent whitespace automatically selects the entire enclosed SQL block, speeding up partial subquery execution (compatible with VS Code, Cursor, Windsurf, Trae, etc.).
+- **Dark Theme & Icon Visual Enhancements**:
+  - Explorer tree icons for tables, functions, events, and databases now dynamically adapt with brighter contrast in dark mode;
+  - Refined the New Connection view in dark themes by removing harsh grey backgrounds on database badges, improving category selection legibility, and sharpening card hover borders.
+
+### Bug Fixes
+
+- Fixed low contrast and illegible "Connection Successful" toast text under light themes such as Trae.
+
+---
 
 ### 改进与优化
 
@@ -149,6 +306,16 @@
 
 ## [0.8.11] - 2026-09-27
 
+### Improvements & Enhancements
+
+- Added batch column name copying and multi-column pinning in result grids, with streamlined header menus.
+
+### Bug Fixes
+
+- Fixed alternating row colors not updating by visual order after sorting, and resolved submenu viewport overflow issues.
+
+---
+
 ### 改进与优化
 
 - 结果网格新增多选列批量复制列名与多列固定支持，优化列菜单展示。
@@ -158,6 +325,26 @@
 - 修复排序后斑马纹底色未按视觉顺序更新及子菜单靠边溢出的问题。
 
 ## [0.8.10] - 2026-09-27
+
+### Improvements & Enhancements
+
+- **Execution History Grid & Sorting Enhancements**:
+  - Click column headers directly to toggle sorting (Ascending ↑ → Descending ↓ → None);
+  - Numeric columns (duration, row count) sort by actual numerical values, while types, sources, and actions sort by localized display labels;
+  - Guarded plan explorer tree grids from unintended sorting to preserve parent-child operator hierarchies.
+- **Result Grid Column Header & Sorting Enhancements**:
+  - Click column headers to toggle sorting state smoothly;
+  - Support flexible column selection: `Ctrl+Click` toggles single column selection, while `Shift+Click` performs multi-column range selections.
+- **Query Plan Panel Refinements**:
+  - Streamlined the execution plan panel by removing experimental chart visualizations, focusing on the stability of the hierarchical plan tree and raw result grid.
+
+### Bug Fixes
+
+- Fixed an issue where "Copy Column Name" from the header menu could unintentionally select the entire column.
+- Fixed an issue where expanded row details could detach and drop to the bottom of the table after sorting; details are now collapsed prior to sorting and correctly anchored under the current row when expanded.
+- Fixed an issue where execution history column filters displayed internal code names instead of user-friendly localized labels.
+
+---
 
 ### 改进与优化
 
@@ -179,6 +366,21 @@
 
 ## [0.8.9] - 2026-09-27
 
+### Improvements & Enhancements
+
+- **Visual Query Plan Explorer (EXPLAIN Tree)**:
+  - Upgraded "Explain" for PostgreSQL families and MySQL 8.0+ into hierarchical plan tree grids, displaying operator details, filter predicates, estimated rows, and optimizer cost percentages, with seamless toggling back to raw results;
+  - Added structured plan tree support for SQLite and DuckDB, replacing raw bytecode outputs.
+- **Safe Actual Query Execution Analysis (EXPLAIN ANALYZE)**:
+  - Added "Analyze" action to safely measure actual execution durations and real row counts on read-only statements (guarded by confirmation prompts; write queries strictly rejected);
+  - Plan explorer panels now share the unified Result Grid infrastructure for consistent theming and cell copy interactions.
+- **AI Agent Query Diagnostics Enhancement**:
+  - Automatically incorporates compact plan tree context when agents explain queries, enabling more accurate index and performance tuning recommendations.
+- **Instant Explorer Cache Invalidation**:
+  - Invalidates database table caches immediately upon explorer refresh, eliminating delayed table counts after creating or dropping tables.
+
+---
+
 ### 新增与改进
 
 - **全新可视化执行计划树表（EXPLAIN）**：
@@ -194,17 +396,36 @@
 
 ## [0.8.8] - 2026-09-26
 
+### Improvements & Enhancements
+
+- Upgraded grid interactions and execution history: added multi-cell range dragging, column selections, advanced Copy As formats, and unified the history grid experience.
+
+---
+
 ### 改进与优化
 
 - 全面升级网格交互与历史记录：新增单元格多选拖拽框选、列头连选、高级复制格式（带表头/逗号分隔列表），并统一历史记录网格交互与稳定性。
 
 ## [0.8.7] - 2026-09-23
 
+### Improvements & Fixes
+
+- Added tabbed multi-resultset rendering for stored procedures across MySQL, MariaDB, Doris, and SQL Server, with a configurable result set limit.
+
+---
+
 ### 改进与优化
 
 - 新增存储过程多结果集分 Tab 展示支持（涵盖 MySQL/MariaDB/Doris/SQL Server），并新增最大结果集上限配置项。
 
 ## [0.8.6] - 2026-09-21
+
+### Improvements & Fixes
+
+- Website theme configuration optimizations.
+- Fixed grid background color display issues.
+
+---
 
 ### 改进与优化
 
@@ -213,17 +434,40 @@
 
 ## [0.8.5] - 2026-09-21
 
+### Improvements & Fixes
+
+- Added customizable selected row background and text colors for custom themes, optimized grid display, and resolved known issues.
+
+---
+
 ### 改进与优化
 
 - 自定义主题新增选中行自定义背景色、字体颜色，优化网格显示，解决已知问题。
 
 ## [0.8.4] - 2026-09-20
 
+### Fixes & Improvements
+
+- Fixed an issue where executing CALL stored procedures failed on MySQL, MariaDB, and Doris when parsing trailing multi-resultset packets.
+
+---
+
 ### 优化与修复
 
 - 修复 MySQL、MariaDB 及 Doris 下执行 CALL 存储过程时多结果集末尾解析报错的问题。
 
 ## [0.8.3] - 2026-09-17
+
+### Added
+
+- **Multi-Database Visual User & Privilege Management**: Right-click any supported connection to open the new Privilege Management panel for managing user accounts, creating/dropping users, changing passwords, assigning roles, and configuring permission matrices.
+  - **MySQL / MariaDB**: Supports account listing, database-level privilege matrix editing, graceful fallback when global `mysql.user` permissions are missing, and read-only connection safeguards.
+  - **PostgreSQL / Kingbase / GaussDB / openGauss**: Supports role inspection, LOGIN privileges, password updates, role membership inheritance, and database/schema-level grants (CONNECT, CREATE, TEMP, USAGE).
+  - **Oracle / Dameng**: Supports user inspection, default tablespace management, password resets, system privileges, roles, and cascade dropping.
+  - **Doris**: Natively adapts to Doris-specific privilege names (e.g., `LOAD_PRIV`, `SELECT_PRIV`), database grants, and multi-Catalog scoping.
+- **Sensitive Credential Redaction & Auditing**: All privilege SQL scripts automatically redact plain-text passwords in previews and persistently archive audit logs into execution history.
+
+---
 
 ### 新增
 
@@ -236,17 +480,53 @@
 
 ## [0.8.2] - 2026-09-14
 
+### Improvements
+
+- Comprehensive execution history enhancements: unified action tracking across all sources, accurate database/schema scoping and filtering, explicit cancel/error status handling, and improved history panel inspection.
+
+---
+
 ### 改进
 
 - 全面优化执行历史记录体系：全端操作埋点归档、执行库/Schema 上下文精准记录与过滤、取消/报错细化区分及历史面板交互体验升级。
 
 ## [0.8.1] - 2026-09-11
 
+### Added
+
+- Added built-in MCP support: multidimensional database agent toolsets, safe Redis read-only inspection, and strict security/privacy isolation with DML/DDL authorization confirmation.
+
+---
+
 ### 新增
 
 - 新增内置 MCP 支持：智能体多维库表工具集、Redis 只读检视 及 安全隐私隔离与 DML/DDL 授权确认机制。
 
 ## [0.8.0] - 2026-09-10
+
+### Added
+
+- **Dameng Partitioning Support**: Creating Dameng tables now supports RANGE, LIST, and HASH partitions, with a dedicated Partitions tab in table details.
+- **Hive Advanced Table Design**: Hive table designer now supports custom ROW FORMAT delimiters and SerDe configurations (with built-in presets including LazySimpleSerDe and OpenCSVSerde).
+- **Expanded Query Cancellation**: In-flight query cancellation is now natively supported for SQL Server, Oracle, Dameng, and Doris when executing individual statements.
+- **Explorer Filter Enhancement**: Database Explorer object filtering now includes Scheduled Events.
+- **Dedicated Diagnostic Output Channel**: Key errors (driver downloads, table metadata failures, routine/package loading issues) are now logged to the "DMSQL" channel in VS Code's Output panel for easier troubleshooting.
+
+### Improvements
+
+- **Accurate SQL Editor Connection Binding**: Table hover tooltips, Ctrl+click definition jumps, autocompletion, and formatting strictly follow the connection and database bound to the current file.
+- **Out-of-the-Box Autocompletion for PG / SQL Server / DuckDB**: Newly created connections provide table hover, jump, and autocompletion without needing to manually expand schemas in the explorer first.
+- **Streaming Database Backup**: Database backup now streams INSERT statements in batches, significantly reducing memory consumption on large databases.
+- **Comprehensive Localization & Performance**:
+  - Webviews dynamically load only the active language in English UI, reducing bundle size and improving load speed;
+  - Localized error messages for driver states, SSH tunnel/proxy failures, backup comments, and table details;
+  - Localized status badges across monitoring views (e.g., PostgreSQL waiting locks, MySQL lock notices).
+- **Result Grid Tab Isolation**: Fixed an issue where closing or moving result tabs could bleed editing state into other grids; improved batch result tab numbering.
+- **Fine-Grained Table Cache Invalidation**: Refreshing a table clears only its own column cache without inadvertently invalidating tables with identical name prefixes.
+- **Graceful Excel Import Error Handling**: Corrupted Excel files now surface clear diagnostic error messages instead of an empty table.
+- **Strengthened Security Policy**: Harmonized and tightened Content Security Policy (CSP) across all Webview panels, removing `unsafe-eval`.
+
+---
 
 ### 新增
 
@@ -272,154 +552,24 @@
 
 ## [0.7.5] - 2026-09-07
 
+### Improvements & Fixes
+
+- Resolved known issues and optimized extension package size.
+
+---
+
 ### 优化与修复
 
 - 解决已知问题，优化安装包体积。
 
 ## [0.7.4] - 2026-09-06
 
+### Improvements
+
+- **Adaptive Grid Theme by Default & Setting Naming Optimization**: The default option for `dmsql.grid.themeMode` now automatically follows the current VS Code editor theme colors (`default`). The classic high-contrast theme is explicitly named `dmsql` (displayed as `DMSQL Classic` in settings). Previous `adaptive` configurations are automatically adapted at runtime and smoothly migrated to `default` upon extension startup without manual intervention.
+
+---
+
 ### 改进
 
 - **网格主题默认自适应与配置命名优化**：网格主题模式（`dmsql.grid.themeMode`）的默认选项调整为完全跟随 VS Code 编辑器主题色（`default`）；经典质感主题显式命名为 `dmsql`（下拉菜单显示为 `DMSQL Classic`）。旧配置中的 `adaptive` 选项在运行时直接自适应渲染，并在扩展启动时自动平滑迁移为 `default`，无需手动修改。
-
-## [0.7.3] - 2026-09-03
-
-### 改进
-
-- **生成 SQL 脚本形式优化**：在资源树数据表/视图右键「生成 SQL 脚本」（包括 SELECT、INSERT、UPDATE、DELETE、查看建表 DDL 等）时，改为直接复制到系统剪贴板并弹出提示，不再创建临时的未保存 SQL 编辑器文件。
-
-## [0.7.2] - 2026-09-01
-
-### 改进
-
-- **表数据浏览多标签页支持**：在资源树右键「浏览数据」或点击表右侧数据图标时，不同表在各自独立的标签页中打开，不再覆盖已有页面。
-- **表结构元数据导出国际化自适应**：导出 Markdown / SQL 元数据文档时根据当前语言环境自动适配中英文模板及表头/注释，并精简去除文档顶部多余说明。
-
-## [0.7.1] - 2026-08-31
-
-### 修复
-
-- 修复 SQL 编辑器悬停表名时，字段「主键」「允许为空」显示不正确的问题。
-- 悬停、单击跳转表名、智能补全改为跟随当前选用的库或 Schema，切换后不再失效。
-- 列信息暂时获取失败时，不再长时间显示空列表。
-- 修复快速连接或自动重连时偶发互相干扰的问题。
-- 执行单条语句时，仅在能真正中断查询的数据库上显示「取消」（MySQL / MariaDB、PostgreSQL / 人大金仓 / GaussDB / openGauss、Trino）。多语句批量执行与导出 CSV 的取消仍对所有库有效。
-- 去掉资源树表节点右键菜单里重复的「刷新」。
-- Oracle / 达梦新建用户改为弹出输入口令，不再使用内置默认口令。
-
-### 改进
-
-- 模拟数据「固定列语义映射」设置项的下拉标签跟随编辑器语言。
-
-## [0.7.0] - 2026-08-28
-
-### 新增
-
-- Oracle / 达梦资源树增加 Packages：查看包头与包体、展开包内成员、编译与删除；分组上可生成包模板。
-- PostgreSQL / 人大金仓 / GaussDB / openGauss：物化视图单独分组；序列分组在系统表不可用时自动隐藏。
-- DuckDB 连接可直接打开 Parquet / CSV 并生成查询。
-- Redis：检视 Hash / ZSet；可为 Key 设置 TTL、持久化、删除，以及修改 Hash 字段。
-- SQL 编辑器右键「解释」：对当前语句执行方言 EXPLAIN，并以表格显示（Redis 不可用）。
-- 单元格检视支持 JSON 折叠树与十六进制查看。
-- PostgreSQL 监控页只读列出已安装扩展。
-- Doris 表详情显示数据模型与分桶；ClickHouse 表详情显示 parts 汇总。
-- SQL Server 导入可选 IDENTITY_INSERT。
-- 表右键 ANALYZE（PostgreSQL / 人大金仓 / GaussDB / openGauss）/ OPTIMIZE（MySQL / MariaDB），执行前需确认。
-
-### 改进
-
-- 资源树展开默认显示表的预估行数和大小，可在设置中关闭以加快大库展开。
-- 只读连接以及 Hive、Redis 不再出现截断等不适用的菜单。
-- 连接心跳失败后，下次执行会自动重连；查询支持取消。
-- 编辑器中建表、改表、删表等成功后，自动刷新对应库的资源树。
-- 分页结果导出 CSV 改为流式写出，大结果集更稳。
-- ClickHouse 表节点显示引擎名。
-- Oracle / 达梦：过程运行改为 CALL；成功后在独立结果页显示 DBMS_OUTPUT。
-- Trino 执行通知显示查询进度，并支持取消正在执行的查询。
-- 从资源树生成 SQL 或打开新编辑器时，自动绑定对应连接，不再落到当前活动库。
-
-## [0.6.9] - 2026-08-27
-
-### 改进
-
-- 优化资源树筛选查询选择逻辑，新增支持注释搜索筛选。
-
-## [0.6.8] - 2026-08-26
-
-### 修复
-
-- 修复数据转置后结果错误的BUG。
-
-## [0.6.7] - 2026-08-25
-
-### 改进
-
-- 打开或切换 SQL 文件时，自动带上当前连接与上次选用的库。
-- 结果行展开详情：长列名与注释可换行，宽度自适应，列名和值可选中复制。
-
-### 修复
-
-- 修复弹出「Webview is disposed」的问题。
-
-## [0.6.6] - 2026-08-25
-
-### 新增
-
-- 模拟数据自定义匹配增加 UUID 选项：生成 32 位十六进制 UUID。
-
-## [0.6.5] - 2026-08-19
-
-### 新增
-
-- Redis、Trino 支持。
-
-## [0.6.4] - 2026-08-18
-
-### 新增
-
-- 部分数据库改为首次使用时按需下载驱动，扩展安装包更小。无法联网时，可拷贝已安装的驱动目录，或使用命令「安装离线驱动包」。
-- 设置中可指定驱动下载镜像地址。
-
-## [0.6.3] - 2026-08-18
-
-### 新增
-
-- 「生成模拟数据」支持保存和导入配置模板，方便重复使用同一套规则。
-
-### 改进
-
-- 资源树等界面文案更完整地跟随界面语言。
-
-## [0.6.2] - 2026-08-17
-
-### 新增
-
-- 新增项目内保存连接信息：项目连接保存在工作区 `.dmsql/connections.json`，项目内连接与全局连接重复时以项目为准。
-
-## [0.6.1] - 2026-08-16
-
-### 改进
-
-- 优化图标显示。
-
-## [0.6.0] - 2026-08-15
-
-### 新增
-
-- 新建连接支持 MariaDB、人大金仓、GaussDB、openGauss、SQL Server、DuckDB。
-- 新建连接图库支持收藏常用库（默认 MySQL / Oracle / ClickHouse），全部库可按关系型 / 分析型 / 文件库 / 大数据分组浏览。
-
-## [0.5.1] - 2026-08-14
-
-### 修复
-
-- 修复 AI 生成模拟数据在宽表上容易失败的问题。
-- 修复关闭「生成模拟数据」面板后再打开时报错的问题。
-
-### 改进
-
-- 「生成模拟数据」支持多开：不同表打开不同标签页；同一张表若已打开，则激活已有标签页。
-
-## [0.5.0] - 2026-08-13
-
-### 测试版发布
