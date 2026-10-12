@@ -8,6 +8,28 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 ---
 
+## [0.8.28] - 2026-10-12
+
+### Improvements & Enhancements
+
+- **Pivot Mode Usability**: Supports drag-and-drop column reordering and independent quick search.
+- **Load All Rows**: Added one-click action to load all query rows.
+
+### Bug Fixes
+
+- **Column Filter Menu**: Fixed unexpected menu closure when scrolling through the filter value list.
+
+---
+
+### 改进与优化
+
+- **透视模式体验升级**：透视模式支持拖拽调整列顺序，支持独立快速搜索。
+- **数据查询加载增强**：查询数据新增全部加载功能。
+
+### 修复
+
+- **列筛选菜单滚动修复**：解决列筛选菜单鼠标滚动导致菜单关闭的问题。
+
 ## [0.8.27] - 2026-10-11
 
 ### Improvements & Enhancements
@@ -561,15 +583,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### 优化与修复
 
 - 解决已知问题，优化安装包体积。
-
-## [0.7.4] - 2026-09-06
-
-### Improvements
-
-- **Adaptive Grid Theme by Default & Setting Naming Optimization**: The default option for `dmsql.grid.themeMode` now automatically follows the current VS Code editor theme colors (`default`). The classic high-contrast theme is explicitly named `dmsql` (displayed as `DMSQL Classic` in settings). Previous `adaptive` configurations are automatically adapted at runtime and smoothly migrated to `default` upon extension startup without manual intervention.
-
----
-
-### 改进
-
-- **网格主题默认自适应与配置命名优化**：网格主题模式（`dmsql.grid.themeMode`）的默认选项调整为完全跟随 VS Code 编辑器主题色（`default`）；经典质感主题显式命名为 `dmsql`（下拉菜单显示为 `DMSQL Classic`）。旧配置中的 `adaptive` 选项在运行时直接自适应渲染，并在扩展启动时自动平滑迁移为 `default`，无需手动修改。
