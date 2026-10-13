@@ -8,6 +8,26 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 ---
 
+## [0.8.30] - 2026-10-13
+
+### 改进与优化
+
+- **连接节点交互与菜单优化**：未连接的节点右侧新增快捷连接图标（连接成功后自动隐藏）；连接节点右键菜单新增「断开连接」选项。
+
+### 修复
+
+- **单连接独立重连修复**：修复点击单个连接时误触发其他失败连接一并重连的问题，并精简连接失败提示。
+
+---
+
+### Improvements & Enhancements
+
+- **Connection Node Actions & Context Menu Polish**: Added an inline quick-connect icon on disconnected nodes (auto-hidden when connected), and added a "Disconnect" option to the connection context menu.
+
+### Bug Fixes
+
+- **Isolated Single Connection Retry**: Fixed an issue where connecting a single node unintentionally triggered reconnection attempts on other failed connections, and streamlined connection failure messages.
+
 ## [0.8.29] - 2026-10-13
 
 ### 新特性与改进
@@ -537,51 +557,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Added
 
 - Added built-in MCP support: multidimensional database agent toolsets, safe Redis read-only inspection, and strict security/privacy isolation with DML/DDL authorization confirmation.
-
-## [0.8.0] - 2026-09-10
-
-### 新增
-
-- **达梦表分区支持**：新建达梦数据表支持配置 RANGE / LIST / HASH 分区，并在表信息面板中支持检视分区列表与定义。
-- **Hive 表设计高级配置**：Hive 表结构设计器新增支持自定义 ROW FORMAT 字段分隔符与 SerDe（内置 LazySimpleSerDe / OpenCSVSerde 常用预设）。
-- **更多数据库支持查询取消**：执行单条语句时，新增支持在 SQL Server、Oracle、达梦、Doris 运行中点击「取消」并真正中断正在执行的查询。
-- **资源树对象筛选增强**：数据库浏览器筛选分组新增对定时任务（Events）的搜索与过滤。
-- **诊断日志通道**：驱动下载失败、表详情加载异常或例程/包加载错误等关键信息自动记录至 VS Code「输出」面板的 DMSQL 通道，更便于排查定位问题。
-
-### 改进
-
-- **SQL 编辑器上下文精准绑定**：表名悬停提示、Ctrl+单击跳转定义、智能补全与 SQL 格式化严格跟随当前编辑器所绑定的连接与库，不再受侧边栏最新点击状态影响。
-- **PostgreSQL / SQL Server / DuckDB 补全免展开**：新建连接后无需在资源树手动点开 Schema，即可直接在 SQL 编辑器中使用表名悬停、跳转及智能补全。
-- **数据库备份性能优化**：数据库备份改为流式按批写出 INSERT 语句，大幅减少大库备份过程中的内存占用。
-- **全站多语言与本地化深度对齐**：
-  - 英文界面下 Webview 按需加载单语种文案，界面加载更快、包体更轻量；
-  - 驱动状态提示、代理/SSH隧道异常、备份脚本说明及表详情加载提示全面适配界面语言；
-  - 监控面板状态提示（如 PostgreSQL 等待锁、MySQL 锁信息说明）与连接表单配置项跟随界面语言。
-- **结果集页签隔离与编号优化**：修复关闭或移动结果页签时偶发的编辑状态窜动问题，优化批量查询结果页签的编号展示。
-- **单表刷新缓存粒度优化**：单表刷新时仅清除该表的列缓存，不再影响同名前缀的其他表。
-- **导入异常反馈改进**：损坏的 Excel 文件导入时直接弹出清晰错误提示，杜绝展示异常空白表。
-- **安全策略收紧**：全面统一并收紧所有 Webview 视图的 Content Security Policy（CSP），移除 `unsafe-eval`。
-
----
-
-### Added
-
-- **Dameng Partitioning Support**: Creating Dameng tables now supports RANGE, LIST, and HASH partitions, with a dedicated Partitions tab in table details.
-- **Hive Advanced Table Design**: Hive table designer now supports custom ROW FORMAT delimiters and SerDe configurations (with built-in presets including LazySimpleSerDe and OpenCSVSerde).
-- **Expanded Query Cancellation**: In-flight query cancellation is now natively supported for SQL Server, Oracle, Dameng, and Doris when executing individual statements.
-- **Explorer Filter Enhancement**: Database Explorer object filtering now includes Scheduled Events.
-- **Dedicated Diagnostic Output Channel**: Key errors (driver downloads, table metadata failures, routine/package loading issues) are now logged to the "DMSQL" channel in VS Code's Output panel for easier troubleshooting.
-
-### Improvements
-
-- **Accurate SQL Editor Connection Binding**: Table hover tooltips, Ctrl+click definition jumps, autocompletion, and formatting strictly follow the connection and database bound to the current file.
-- **Out-of-the-Box Autocompletion for PG / SQL Server / DuckDB**: Newly created connections provide table hover, jump, and autocompletion without needing to manually expand schemas in the explorer first.
-- **Streaming Database Backup**: Database backup now streams INSERT statements in batches, significantly reducing memory consumption on large databases.
-- **Comprehensive Localization & Performance**:
-  - Webviews dynamically load only the active language in English UI, reducing bundle size and improving load speed;
-  - Localized error messages for driver states, SSH tunnel/proxy failures, backup comments, and table details;
-  - Localized status badges across monitoring views (e.g., PostgreSQL waiting locks, MySQL lock notices).
-- **Result Grid Tab Isolation**: Fixed an issue where closing or moving result tabs could bleed editing state into other grids; improved batch result tab numbering.
-- **Fine-Grained Table Cache Invalidation**: Refreshing a table clears only its own column cache without inadvertently invalidating tables with identical name prefixes.
-- **Graceful Excel Import Error Handling**: Corrupted Excel files now surface clear diagnostic error messages instead of an empty table.
-- **Strengthened Security Policy**: Harmonized and tightened Content Security Policy (CSP) across all Webview panels, removing `unsafe-eval`.

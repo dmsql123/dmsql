@@ -1,6 +1,6 @@
 # DMSQL **- Database Manager SQL Tool**
 
-面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL、MariaDB、Oracle、PostgreSQL、人大金仓、GaussDB、openGauss、SQL Server、SQLite、DuckDB、ClickHouse、Doris、达梦 (Dameng)、Hive、Redis、Trino** 等 16 种数据库。纯本地运行，隐私安全无遥测，密码采用 SecretStorage 加密存储。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
+面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL、MariaDB、Oracle、PostgreSQL、人大金仓、GaussDB、openGauss、SQL Server、SQLite、DuckDB、ClickHouse、Doris、达梦 (Dameng)、Hive、Redis、Trino** 等 16 种数据库。数据库纯本地直连，业务数据与 SQL 绝不经云端中转，密码采用 SecretStorage 加密存储。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
 
 - **官网**：[https://dmsql.top](https://dmsql.top)
 - **操作文档**：[https://dmsql.top/docs](https://dmsql.top/docs)
@@ -14,7 +14,7 @@
 ## 核心亮点
 
 - **多数据库支持**：支持 MySQL、MariaDB、Oracle、PostgreSQL、人大金仓、GaussDB、openGauss、SQL Server、SQLite、DuckDB、ClickHouse、Doris、达梦 (Dameng)、Hive、Redis、Trino。
-- **纯本地安全**：零云端依赖，密码通过 VS Code SecretStorage 硬件/系统级安全加密。
+- **本地直连与隐私安全**：数据库连接与 SQL 执行纯本机直连，业务数据绝不经云端中转，密码通过 VS Code SecretStorage 硬件/系统级安全加密。
 - **可视化表结构设计器**：支持可视化新建/修改表结构，字段类型、主键、自增、索引、外键约束一站式图形化配置与 DDL 预检。
 - **智能模拟数据生成器**：支持基于字段语义的 Faker 模拟数据生成（42+ 内置语义类型），并支持配置 OpenAI/DeepSeek 协议通过 AI 生成逼真测试数据。
 - **高级数据分析网格**：基于 AG Grid 构建，支持行列数据转置 (Transpose)、透视模式 (Pivot)、单元格/行深度检视器、DBeaver 风格选择与在线数据编辑持久化。
@@ -41,7 +41,7 @@
 - **完整对象树**：连接 → 数据库/Schema → 数据表 / 视图 / 存储过程 / 函数 / 定时任务 → 字段 (标记主键/注释) / 索引 / 外键。
 - **分组与筛选**：支持连接文件夹分组 (Folder Group)，节点支持名称搜索/增量筛选，实时显示各节点子对象数量。
 - **右键丰富指令**：
-  - **连接节点**：重新连接、设为活动连接、编辑/复制连接、复制连接串、移动到文件夹、新建数据库、查看历史、筛选节点。
+  - **连接节点**：连接、断开连接、设为活动连接、编辑/复制连接、复制连接串、移动到文件夹、新建数据库、查看历史、筛选节点。
   - **数据库节点**：新建 SQL 文件、备份数据库、还原数据库、批量导出表信息、删除数据库。
   - **表/视图节点**：查看数据 (Preview)、查看表信息、查看 DDL、**新建/编辑表结构**、**生成模拟数据**、数据导入/导出、**生成 SQL 脚本** (SELECT/INSERT/UPDATE/DELETE/DDL)、截断/删除表。
   - **存储过程/函数/任务**：查看定义 SQL、生成运行 SQL、启用/禁用定时任务、删除。
