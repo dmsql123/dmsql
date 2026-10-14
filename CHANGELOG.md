@@ -8,6 +8,30 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 ---
 
+## [0.8.31] - 2026-10-14
+
+### 新增
+
+- **SQL 笔记本（.dmsnb）**：全新支持交互式 SQL 笔记本，可在同一文档内混合编写 Markdown 说明与 SQL 语句。支持逐格顺序执行并在单元格下方直接渲染数据网格（可一键展开至主结果面板）；支持运行前参数变量配置；支持通过数据库节点右键菜单或快捷按钮一键创建。
+
+### 优化
+
+- **资源树右键菜单**：优化资源树右键菜单顺序以及显示逻辑。
+- **SQL 执行错误提示精简**：优化执行失败提示，突出展示核心错误摘要与数据库错误码，剔除冗长底层调用堆栈。
+- **单连接并发执行保护**：增加同连接运行状态保护，防止同一数据库连接并发执行导致的连接冲突。
+
+---
+
+### Added
+
+- **Interactive SQL Notebook (.dmsnb)**: Native support for interactive SQL notebooks, allowing Markdown notes and executable SQL cells in a single document. Features sequential cell execution with inline grid results (expandable to the main result panel), pre-execution variable prompts, and dedicated creation actions from database context menus or inline buttons.
+
+### Improvements
+
+- **Explorer Context Menu**: Reorganized explorer context menu ordering and visibility logic.
+- **Streamlined SQL Error Messages**: Improved error banners by highlighting the core error summary and error code while eliminating cluttered internal stack traces.
+- **Connection Concurrency Protection**: Added run locks per connection to prevent command collisions during concurrent execution on the same database session.
+
 ## [0.8.30] - 2026-10-13
 
 ### 改进与优化
@@ -545,15 +569,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements
 
 - Comprehensive execution history enhancements: unified action tracking across all sources, accurate database/schema scoping and filtering, explicit cancel/error status handling, and improved history panel inspection.
-
-## [0.8.1] - 2026-09-11
-
-### 新增
-
-- 新增内置 MCP 支持：智能体多维库表工具集、Redis 只读检视 及 安全隐私隔离与 DML/DDL 授权确认机制。
-
----
-
-### Added
-
-- Added built-in MCP support: multidimensional database agent toolsets, safe Redis read-only inspection, and strict security/privacy isolation with DML/DDL authorization confirmation.

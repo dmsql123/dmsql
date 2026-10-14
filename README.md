@@ -105,6 +105,7 @@
 
 ## 智能模拟数据生成器 (Mock Data)
 
+![DMSQL](https://cdn.jsdelivr.net/gh/dmsql123/dmsql@main/docs/2.png)
 - **语义推断与 Faker 规则**：根据列名与字段类型自动匹配 Faker 规则，覆盖 42+ 内置语义类型（如姓名、身份证、手机号、公司、地址、IP、金额、日期等）。
 - **自定义映射配置**：支持在 VS Code `settings.json` 中配置固定列名的语义映射规则。
 - **AI 智能生成模式**：可配置 OpenAI / DeepSeek 等标准 API 接口，通过 AI 大语言模型生成符合现实业务上下文的复杂高质测试数据。
