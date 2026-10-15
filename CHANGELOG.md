@@ -8,6 +8,36 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 ---
 
+## [0.8.32] - 2026-10-15
+
+### 新增
+
+- **数据库接入扩展至 33 种**：新建连接向导（图库）新增 17 款常用协议兼容数据库，配备专属品牌图标与默认端口：
+  - MySQL 系：TiDB、OceanBase（MySQL 模式）、PolarDB MySQL、TDSQL MySQL、GoldenDB；
+  - PostgreSQL 系：CockroachDB、YugabyteDB、Greenplum、PolarDB PostgreSQL、瀚高数据库 (HighGo)、海量数据库 (Vastbase)、优炫数据库 (UXDB)；
+  - SQL Server 系：Azure SQL；
+  - Doris 系：StarRocks、SelectDB；
+  - Redis 系：Valkey、KeyDB。
+
+### 优化
+
+- **连接节点品牌识别**：资源树根节点图标与悬停提示精准跟随所选具体数据库产品；图库收藏支持按具体数据库卡片独立加星。
+
+---
+
+### Added
+
+- **Expanded Database Catalog (33 Databases)**: Added 17 protocol-compatible database options to the connection wizard gallery, each with dedicated branding icons and default ports:
+  - MySQL family: TiDB, OceanBase (MySQL mode), PolarDB MySQL, TDSQL MySQL, GoldenDB;
+  - PostgreSQL family: CockroachDB, YugabyteDB, Greenplum, PolarDB PostgreSQL, HighGo, Vastbase, UXDB;
+  - SQL Server family: Azure SQL;
+  - Doris family: StarRocks, SelectDB;
+  - Redis family: Valkey, KeyDB.
+
+### Improvements
+
+- **Connection Node Brand Identification**: Explorer root connection node icons and tooltips accurately reflect the specific database product; gallery favorites now support starring individual product cards independently.
+
 ## [0.8.31] - 2026-10-14
 
 ### 新增
@@ -557,15 +587,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
   - **Oracle / Dameng**: Supports user inspection, default tablespace management, password resets, system privileges, roles, and cascade dropping.
   - **Doris**: Natively adapts to Doris-specific privilege names (e.g., `LOAD_PRIV`, `SELECT_PRIV`), database grants, and multi-Catalog scoping.
 - **Sensitive Credential Redaction & Auditing**: All privilege SQL scripts automatically redact plain-text passwords in previews and persistently archive audit logs into execution history.
-
-## [0.8.2] - 2026-09-14
-
-### 改进
-
-- 全面优化执行历史记录体系：全端操作埋点归档、执行库/Schema 上下文精准记录与过滤、取消/报错细化区分及历史面板交互体验升级。
-
----
-
-### Improvements
-
-- Comprehensive execution history enhancements: unified action tracking across all sources, accurate database/schema scoping and filtering, explicit cancel/error status handling, and improved history panel inspection.
