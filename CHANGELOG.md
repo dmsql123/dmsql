@@ -8,6 +8,28 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 ---
 
+## [0.8.33] - 2026-10-15
+
+### 优化
+
+- **SSH 隧道主机指纹核对**：首次连接 SSH 隧道或主机指纹变更时，在发送登录凭据前主动提示核对主机指纹；支持「记住并继续」、「仅本次继续」或「拒绝」，指纹独立存储不修改系统 `known_hosts`。
+- **代理协议类型引导提示**：当系统代理为 SOCKS 协议时，提供清晰引导提示改用 Socks 代理配置。
+
+### 修复
+
+- **HTTP 代理数据与连接稳定性修复**：修复 HTTP CONNECT 握手后紧邻的首截数据可能丢失的问题，并解决空闲连接被超时错误误掐断的问题。
+
+---
+
+### Improvements
+
+- **SSH Tunnel Host Fingerprint Verification**: Prompts to verify host key fingerprints before sending authentication credentials on first connection or when host key changes; supports "Remember", "This time only", or "Reject" without modifying the system `known_hosts` file.
+- **Proxy Protocol Guidance**: Displays clear actionable guidance to switch to Socks proxy when the detected system proxy uses SOCKS.
+
+### Bug Fixes
+
+- **HTTP Proxy Data & Connection Stability**: Fixed an issue where the initial chunk of data following the HTTP CONNECT handshake could be dropped, and resolved an issue where idle connections were prematurely terminated by timeouts.
+
 ## [0.8.32] - 2026-10-15
 
 ### 新增
@@ -565,25 +587,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Fixes & Improvements
 
 - Fixed an issue where executing CALL stored procedures failed on MySQL, MariaDB, and Doris when parsing trailing multi-resultset packets.
-
-## [0.8.3] - 2026-09-17
-
-### 新增
-
-- **全新多数据库可视化权限管理**：连接右键新增「权限管理」面板，覆盖用户账号检视、新建/删除用户、修改口令、角色成员与权限矩阵配置。
-  - **MySQL / MariaDB**：支持账号管理、库级权限矩阵动态勾选、无全局权限时的平滑降级探测与只读连接保护。
-  - **PostgreSQL / 金仓 / GaussDB / openGauss**：支持角色管理、登录口令、角色继承、库级（CONNECT/CREATE/TEMP）及 Schema 级（USAGE/CREATE）权限分配。
-  - **Oracle / 达梦 (Dameng)**：支持用户与默认表空间检视、修改口令、常用系统权限与角色分配及级联删除。
-  - **Doris**：原生适配 Doris 特有权限模型（如 `LOAD_PRIV`、`SELECT_PRIV` 等），支持按库及多 Catalog 权限配置。
-- **安全脱敏与操作审计**：权限变更与改密操作生成的 SQL 均自动打码脱敏敏感口令，并完整归档至执行历史记录。
-
----
-
-### Added
-
-- **Multi-Database Visual User & Privilege Management**: Right-click any supported connection to open the new Privilege Management panel for managing user accounts, creating/dropping users, changing passwords, assigning roles, and configuring permission matrices.
-  - **MySQL / MariaDB**: Supports account listing, database-level privilege matrix editing, graceful fallback when global `mysql.user` permissions are missing, and read-only connection safeguards.
-  - **PostgreSQL / Kingbase / GaussDB / openGauss**: Supports role inspection, LOGIN privileges, password updates, role membership inheritance, and database/schema-level grants (CONNECT, CREATE, TEMP, USAGE).
-  - **Oracle / Dameng**: Supports user inspection, default tablespace management, password resets, system privileges, roles, and cascade dropping.
-  - **Doris**: Natively adapts to Doris-specific privilege names (e.g., `LOAD_PRIV`, `SELECT_PRIV`), database grants, and multi-Catalog scoping.
-- **Sensitive Credential Redaction & Auditing**: All privilege SQL scripts automatically redact plain-text passwords in previews and persistently archive audit logs into execution history.
