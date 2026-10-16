@@ -8,6 +8,18 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 ---
 
+## [0.8.34] - 2026-10-16
+
+### 优化
+
+- **自定义主题滚动条自适应**：自定义主题下滚动条根据主题自定义配置色适应，反差主题情况下整体性更强。
+
+---
+
+### Improvements
+
+- **Custom Theme Scrollbar Adaptation**: Scrollbars now dynamically adapt to custom theme color configurations, providing enhanced visual unity in high-contrast theme setups.
+
 ## [0.8.33] - 2026-10-15
 
 ### 优化
@@ -575,15 +587,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements & Fixes
 
 - Added customizable selected row background and text colors for custom themes, optimized grid display, and resolved known issues.
-
-## [0.8.4] - 2026-09-20
-
-### 优化与修复
-
-- 修复 MySQL、MariaDB 及 Doris 下执行 CALL 存储过程时多结果集末尾解析报错的问题。
-
----
-
-### Fixes & Improvements
-
-- Fixed an issue where executing CALL stored procedures failed on MySQL, MariaDB, and Doris when parsing trailing multi-resultset packets.
