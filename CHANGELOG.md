@@ -6,7 +6,17 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.35] - 2026-10-19
+
+### 新增
+
+- **SQL 笔记本单元格连接锁定**：支持将代码单元格锁定到当前数据库连接。
+
 ---
+
+### Added
+
+- **SQL Notebook Cell Connection Locking**: Added support for locking individual code cells to their current database connection.
 
 ## [0.8.34] - 2026-10-16
 
@@ -575,15 +585,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 - Website theme configuration optimizations.
 - Fixed grid background color display issues.
-
-## [0.8.5] - 2026-09-21
-
-### 改进与优化
-
-- 自定义主题新增选中行自定义背景色、字体颜色，优化网格显示，解决已知问题。
-
----
-
-### Improvements & Fixes
-
-- Added customizable selected row background and text colors for custom themes, optimized grid display, and resolved known issues.

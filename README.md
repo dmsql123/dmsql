@@ -13,7 +13,7 @@
 
 ## 核心亮点
 
-- **多数据库支持**：支持 MySQL、MariaDB、TiDB、OceanBase、PolarDB MySQL、TDSQL MySQL、GoldenDB、Oracle、PostgreSQL、CockroachDB、YugabyteDB、Greenplum、PolarDB PostgreSQL、瀚高、海量、优炫、人大金仓、GaussDB、openGauss、SQL Server、Azure SQL、SQLite、DuckDB、ClickHouse、Doris、StarRocks、SelectDB、达梦 (Dameng)、Hive、Redis、Valkey、KeyDB、Trino。
+- **中英文双语支持**：所有相关页面以及配置项均默认自动根据编辑器设定语言页面进行中英文自适应，同时支持通过配置项 `Dmsql: Locale` 自主配置语言设定。
 - **本地直连与隐私安全**：数据库连接与 SQL 执行纯本机直连，业务数据绝不经云端中转，密码通过 VS Code SecretStorage 硬件/系统级安全加密。
 - **可视化表结构设计器**：支持可视化新建/修改表结构，字段类型、主键、自增、索引、外键约束一站式图形化配置与 DDL 预检。
 - **智能模拟数据生成器**：支持基于字段语义的 Faker 模拟数据生成（42+ 内置语义类型），并支持配置 OpenAI/DeepSeek 协议通过 AI 生成逼真测试数据。
