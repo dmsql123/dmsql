@@ -1,6 +1,6 @@
 # DMSQL **- Database Manager SQL Tool**
 
-面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL、MariaDB、TiDB、OceanBase、PolarDB MySQL、TDSQL MySQL、GoldenDB、Oracle、PostgreSQL、CockroachDB、YugabyteDB、Greenplum、PolarDB PostgreSQL、瀚高、海量、优炫、人大金仓、GaussDB、openGauss、SQL Server、Azure SQL、SQLite、DuckDB、ClickHouse、Doris、StarRocks、SelectDB、达梦 (Dameng)、Hive、Redis、Valkey、KeyDB、Trino** 等 33 种数据库。数据库纯本地直连，业务数据与 SQL 绝不经云端中转，密码采用 SecretStorage 加密存储。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
+面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL、MariaDB、TiDB、OceanBase、PolarDB MySQL、TDSQL MySQL、GoldenDB、Oracle、PostgreSQL、CockroachDB、YugabyteDB、Greenplum、PolarDB PostgreSQL、瀚高、海量、优炫、人大金仓、GaussDB、openGauss、SQL Server、Azure SQL、SQLite、DuckDB、ClickHouse、Doris、StarRocks、SelectDB、达梦 (Dameng)、Hive、Redis、Valkey、KeyDB、Trino** 等 33 种数据库。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
 
 - **官网**：[https://dmsql.top](https://dmsql.top)
 - **操作文档**：[https://dmsql.top/docs](https://dmsql.top/docs)
@@ -14,13 +14,15 @@
 ## 核心亮点
 
 - **中英文双语支持**：所有相关页面以及配置项均默认自动根据编辑器设定语言页面进行中英文自适应，同时支持通过配置项 `Dmsql: Locale` 自主配置语言设定。
-- **本地直连与隐私安全**：数据库连接与 SQL 执行纯本机直连，业务数据绝不经云端中转，密码通过 VS Code SecretStorage 硬件/系统级安全加密。
+- **隐私安全**：密码通过本地 VS Code SecretStorage 硬件/系统级安全加密，安全保密，本地化保存。
 - **可视化表结构设计器**：支持可视化新建/修改表结构，字段类型、主键、自增、索引、外键约束一站式图形化配置与 DDL 预检。
 - **智能模拟数据生成器**：支持基于字段语义的 Faker 模拟数据生成（42+ 内置语义类型），并支持配置 OpenAI/DeepSeek 协议通过 AI 生成逼真测试数据。
 - **高级数据分析网格**：基于 AG Grid 构建，支持行列数据转置 (Transpose)、透视模式 (Pivot)、单元格/行深度检视器、DBeaver 风格选择与在线数据编辑持久化。
 - **数据迁移与导入导出**：支持 CSV、Excel (xlsx)、JSON、SQL 脚本导出；支持跨库/跨表数据抽取及本地文件批量导入（含智能列映射与主键冲突策略）。
 - **实时监控与历史审计**：提供活动会话监控（Session Monitor）与 Kill 连接功能；全量 SQL 执行历史可追溯、可搜索与一键复用。
 - **安全护栏与连接保活**：只读连接保护拦截写 SQL、高危指令 (DROP/TRUNCATE/无 WHERE 的 DELETE/UPDATE) 强提醒红色确认；定时心跳保活防止断线。
+- **数据库会话监控 (Monitoring View)**：实时查看当前连接的所有活动进程与会话，展示 Client IP、User、Database、Command、运行时间与 SQL 详情，支持一键终止 (Kill) 连接。
+- **SQL 执行历史 (History View)**：全量记录 SQL 执行历史、执行耗时、影响行数与状态；支持按连接、时间段、关键词筛选并一键复制或在编辑器中重新运行。
 
 ---
 
@@ -101,12 +103,8 @@
 - **语义推断与 Faker 规则**：根据列名与字段类型自动匹配 Faker 规则，覆盖 42+ 内置语义类型（如姓名、身份证、手机号、公司、地址、IP、金额、日期等）。
 - **自定义映射配置**：支持在 VS Code `settings.json` 中配置固定列名的语义映射规则。
 - **AI 智能生成模式**：可配置 OpenAI 标准 API 接口，通过 AI 大语言模型生成符合现实业务上下文的复杂高质测试数据。
-- **安全分批写入**：支持配置每批插入条数。
 
 ---
 
-## 实时监控与历史审计
-
-- **数据库会话监控 (Monitoring View)**：实时查看当前连接的所有活动进程与会话，展示 Client IP、User、Database、Command、运行时间与 SQL 详情，支持一键终止 (Kill) 连接。
-- **SQL 执行历史 (History View)**：全量记录 SQL 执行历史、执行耗时、影响行数与状态；支持按连接、时间段、关键词筛选并一键复制或在编辑器中重新运行。
+**问题反馈 / 功能需求**：请到 GitHub 提交 [Issue](https://github.com/dmsql123/dmsql/issues) 或发送邮件至 [service@dmsql.top](mailto:service@dmsql.top)
 

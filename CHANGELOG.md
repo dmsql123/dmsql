@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.36] - 2026-10-20
+
+### 优化
+
+- 部分图标以及文字菜单显示优化。
+
+---
+
+### Improvements
+
+- Optimized display for selected icons and text menus.
+
 ## [0.8.35] - 2026-10-19
 
 ### 新增
@@ -571,17 +583,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements & Fixes
 
 - Added tabbed multi-resultset rendering for stored procedures across MySQL, MariaDB, Doris, and SQL Server, with a configurable result set limit.
-
-## [0.8.6] - 2026-09-21
-
-### 改进与优化
-
-- 官网主题配置优化。
-- 修复网格背景色显示问题。
-
----
-
-### Improvements & Fixes
-
-- Website theme configuration optimizations.
-- Fixed grid background color display issues.
