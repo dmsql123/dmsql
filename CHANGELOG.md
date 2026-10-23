@@ -6,6 +6,28 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.38] - 2026-10-23
+
+### 新增
+
+- **结果网格连续加载模式**：结果集网格底栏新增「连续加载」模式（可与传统分页随时切换）；滚到底部自动追加下批数据，并提供精确单行步进控制（上一行/下一行/首行/末行）与末行微览；齿轮菜单支持配置默认加载方式及每页行数联动。
+- **连接节点版本悬停提示**：资源树连接根节点在悬停提示 (Tooltip) 中增加数据库版本号展示。
+
+### 优化
+
+- **网格行号列宽自适应**：行号列宽度依据当前最大行号位数自动计算加宽，确保高行数完整呈现不被遮挡。
+
+---
+
+### Added
+
+- **Continuous Loading (Infinite Scroll) for Result Grid**: Added a "Continuous Loading" mode alongside traditional pagination in the grid footer; automatically appends next pages on scroll to bottom with row-by-row navigation buttons (Previous/Next/First/Last Row); settings gear menu supports toggling default paging mode and configuring page size.
+- **Connection Tooltip Version Display**: Displays the detected database version in the connection node tooltip within the database explorer.
+
+### Improvements
+
+- **Dynamic Row Number Column Width**: Automatically widens the grid row index column based on the number of digits of the maximum loaded row.
+
 ## [0.8.37] - 2026-10-22
 
 ### 新增
@@ -17,8 +39,8 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### 优化
 
 - **动态列类型识别与筛选优化**：无元数据类型的结果列按内容自适应推断数值与日期，修复数值/日期筛选退化为文本列表与跨列串值问题；筛选弹窗支持按 Esc 或点击外部自动收起。
-- **分页与单次查询上限逻辑优化**：dmsql.maxRows 默认调整为 0（不限制）；数据快速查看在启用分页时翻页 SQL 不再夹带单次最大行数限制，便于大表后翻。
-- **MySQL 执行计划树展开兼容**：优化 EXPLAIN FORMAT=JSON 解析，兼容带 query_plan 根节点的执行计划树展示。
+- **分页与单次查询上限逻辑优化**：`dmsql.maxRows` 默认调整为 0（不限制）；数据快速查看在启用分页时翻页 SQL 不再夹带单次最大行数限制，便于大表后翻。
+- **MySQL 执行计划树展开兼容**：优化 `EXPLAIN FORMAT=JSON` 解析，兼容带 `query_plan` 根节点的执行计划树展示。
 
 ### 修复
 
@@ -35,8 +57,8 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements
 
 - **Dynamic Column Type Inference & Filter Polish**: Inferred numeric and datetime types from cell contents when column types are missing, fixing filter dropdown issues and column value leakage; filter panels now close on outside click or Esc.
-- **Pagination & Query Row Limit Polish**: Changed default dmsql.maxRows to 0 (unlimited); data preview pagination no longer appends maxRows to pagination SQL, enabling deep pagination on large tables.
-- **MySQL JSON Explain Plan Compatibility**: Enhanced EXPLAIN FORMAT=JSON parser to render plan trees for statements with query_plan roots.
+- **Pagination & Query Row Limit Polish**: Changed default `dmsql.maxRows` to 0 (unlimited); data preview pagination no longer appends maxRows to pagination SQL, enabling deep pagination on large tables.
+- **MySQL JSON Explain Plan Compatibility**: Enhanced `EXPLAIN FORMAT=JSON` parser to render plan trees for statements with `query_plan` roots.
 
 ### Bug Fixes
 
@@ -595,15 +617,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
   - Automatically incorporates compact plan tree context when agents explain queries, enabling more accurate index and performance tuning recommendations.
 - **Instant Explorer Cache Invalidation**:
   - Invalidates database table caches immediately upon explorer refresh, eliminating delayed table counts after creating or dropping tables.
-
-## [0.8.8] - 2026-09-26
-
-### 改进与优化
-
-- 全面升级网格交互与历史记录：新增单元格多选拖拽框选、列头连选、高级复制格式（带表头/逗号分隔列表），并统一历史记录网格交互与稳定性。
-
----
-
-### Improvements & Enhancements
-
-- Upgraded grid interactions and execution history: added multi-cell range dragging, column selections, advanced Copy As formats, and unified the history grid experience.
