@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.39] - 2026-10-25
+
+### 优化
+
+- SQLite 表节点统计显示优化。
+
+---
+
+### Improvements
+
+- Optimized table statistics display for SQLite table nodes in the explorer.
+
 ## [0.8.38] - 2026-10-23
 
 ### 新增
@@ -587,33 +599,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 - Fixed an issue where "Copy Column Name" from the header menu could unintentionally select the entire column.
 - Fixed an issue where expanded row details could detach and drop to the bottom of the table after sorting; details are now collapsed prior to sorting and correctly anchored under the current row when expanded.
 - Fixed an issue where execution history column filters displayed internal code names instead of user-friendly localized labels.
-
-## [0.8.9] - 2026-09-27
-
-### 新增与改进
-
-- **全新可视化执行计划树表（EXPLAIN）**：
-  - PostgreSQL 族（PostgreSQL / 金仓 / GaussDB / openGauss）及 MySQL 8.0+ 右键「解释」全新升级为层次化计划树表，清晰直观展示算子层级、详细谓词、估算行数与代价占比，并支持随时切回原始格式；
-  - SQLite 与 DuckDB 全面升级为树形查询计划，告别晦涩的底层字节码展示。
-- **安全高效的查询实际分析（EXPLAIN ANALYZE）**：
-  - 右键新增「分析」功能，支持安全执行只读查询并捕获真实耗时与实际扫描行数（执行前弹窗确认，严格拦截写操作）；
-  - 计划树面板全面复用结果网格体系，主题配色、单元格复制与列宽体验高度统一。
-- **智能体慢查询诊断上下文增强**：
-  - 内置 AI 智能体在解释 SQL 时自动注入精简计划树结构，大幅提升索引优化与性能调优建议的精准度。
-- **资源树库表即时刷新**：
-  - 刷新数据库节点或表分组时立即清除本地表缓存并重查，彻底解决新建/删表后偶发仍显示旧数量的问题。
-
----
-
-### Improvements & Enhancements
-
-- **Visual Query Plan Explorer (EXPLAIN Tree)**:
-  - Upgraded "Explain" for PostgreSQL families and MySQL 8.0+ into hierarchical plan tree grids, displaying operator details, filter predicates, estimated rows, and optimizer cost percentages, with seamless toggling back to raw results;
-  - Added structured plan tree support for SQLite and DuckDB, replacing raw bytecode outputs.
-- **Safe Actual Query Execution Analysis (EXPLAIN ANALYZE)**:
-  - Added "Analyze" action to safely measure actual execution durations and real row counts on read-only statements (guarded by confirmation prompts; write queries strictly rejected);
-  - Plan explorer panels now share the unified Result Grid infrastructure for consistent theming and cell copy interactions.
-- **AI Agent Query Diagnostics Enhancement**:
-  - Automatically incorporates compact plan tree context when agents explain queries, enabling more accurate index and performance tuning recommendations.
-- **Instant Explorer Cache Invalidation**:
-  - Invalidates database table caches immediately upon explorer refresh, eliminating delayed table counts after creating or dropping tables.
