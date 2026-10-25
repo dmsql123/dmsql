@@ -6,6 +6,28 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.40] - 2026-10-25
+
+### 优化
+
+- **DuckDB 驱动升级至 2.0**：升级 DuckDB 驱动至 2.0，原生支持打开 2.0 新格式数据库文件；已安装环境自动平滑升级且向后兼容旧版库文件。
+- **SQL Server 表统计性能优化**：展开 Schema 时通过分区元数据一次性带出基表行数与存储占用，无需逐表计数。
+
+### 修复
+
+- **带注释 SQL 查询识别修复**：修复 DuckDB、ClickHouse、Hive、Trino 在执行带前置注释的 SELECT 语句时误判为非查询（显示 0 行受影响）的问题。
+
+---
+
+### Improvements
+
+- **DuckDB Driver Upgrade to 2.0**: Upgraded DuckDB driver to 2.0 with native support for opening DuckDB 2.0 database files; existing setups upgrade automatically with backward compatibility for older files.
+- **SQL Server Table Stats Batching**: Retrieved base table row counts and storage sizes in a single query via partition metadata when expanding schemas, eliminating per-table query overhead.
+
+### Bug Fixes
+
+- **Comment-Prefixed Query Detection Fix**: Fixed an issue where SELECT statements prefixed with comments were misidentified as non-queries (showing 0 rows affected) in DuckDB, ClickHouse, Hive, and Trino.
+
 ## [0.8.39] - 2026-10-25
 
 ### 优化
@@ -559,43 +581,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - Fixed alternating row colors not updating by visual order after sorting, and resolved submenu viewport overflow issues.
-
-## [0.8.10] - 2026-09-27
-
-### 改进与优化
-
-- **历史记录交互与列头体验全面升级**：
-  - 支持单击列头快速排序（升序 ↑ / 降序 ↓ / 取消排序三态循环）；
-  - 耗时与行数严格按真实数值排序，类型、来源、动作按本地化展示文案排序；
-  - 执行计划与分析树表保护层级顺序，避免误排序打乱算子父子结构。
-- **结果网格列头交互与排序体验重构**：
-  - 单击列头直接切换排序状态，操作更直观顺畅；
-  - 支持快捷选列：`Ctrl+单击` 切换选中单列，`Shift+单击` 进行连续列区间多选。
-- **执行计划面板精简优化**：
-  - 执行计划面板移除试验阶段的图表视图，聚焦于层次化计划树与原始结果网格的稳定呈现。
-
-### 修复
-
-- 修复列头上下文菜单中「复制列名」偶发误选整列的问题。
-- 修复结果网格排序后展开行错位掉落至表格最底部的问题，现切换排序前自动收起展开项，重排后展开明细紧邻当前行。
-- 修复历史记录列筛选列表显示为内部代号的问题，现已全面对齐为易懂的本地化标签。
-
----
-
-### Improvements & Enhancements
-
-- **Execution History Grid & Sorting Enhancements**:
-  - Click column headers directly to toggle sorting (Ascending ↑ → Descending ↓ → None);
-  - Numeric columns (duration, row count) sort by actual numerical values, while types, sources, and actions sort by localized display labels;
-  - Guarded plan explorer tree grids from unintended sorting to preserve parent-child operator hierarchies.
-- **Result Grid Column Header & Sorting Enhancements**:
-  - Click column headers to toggle sorting state smoothly;
-  - Support flexible column selection: `Ctrl+Click` toggles single column selection, while `Shift+Click` performs multi-column range selections.
-- **Query Plan Panel Refinements**:
-  - Streamlined the execution plan panel by removing experimental chart visualizations, focusing on the stability of the hierarchical plan tree and raw result grid.
-
-### Bug Fixes
-
-- Fixed an issue where "Copy Column Name" from the header menu could unintentionally select the entire column.
-- Fixed an issue where expanded row details could detach and drop to the bottom of the table after sorting; details are now collapsed prior to sorting and correctly anchored under the current row when expanded.
-- Fixed an issue where execution history column filters displayed internal code names instead of user-friendly localized labels.
