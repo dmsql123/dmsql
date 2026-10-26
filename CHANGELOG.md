@@ -6,6 +6,34 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.41] - 2026-10-26
+
+### 新增
+
+- **Oracle / 达梦表约束与触发器展示**：展开表节点支持展示唯一约束、检查约束、外键以及表级触发器，达梦自动解析 `TRIGGERING_TYPE`，并智能过滤 `SYS_C` 系统非空检查约束。
+- **Oracle 全对象元数据浏览**：模式下完整支持物化视图、队列、类型、包、同义词、Java、作业、调度器、数据库连接及回收站等丰富对象分组浏览；字典无权限时自动隐藏。
+- **过程与函数参数列表展示**：达梦与 Oracle 展开存储过程和函数支持查看参数名称、出入参方向（IN / OUT / IN OUT）与数据类型，函数独立呈现返回值定义。
+- **达梦模式表触发器分组**：达梦模式节点下新增「表触发器」对象分组，集中列出当前模式的全部表级触发器。
+
+### 修复
+
+- **清除错误右键菜单**：修复表、数据库、对象分组等非连接节点右键错误显示「断开连接」菜单的问题，仅保留在已连接的连接根节点上。
+- **Oracle 连接串服务名解析修复**：解决仅填写主机与端口时可能误连入监听默认库（如多租户实例根容器 CDB）的问题，确保配置的服务名 (Service Name) 或 SID 正确写入连接串。
+
+---
+
+### Added
+
+- **Oracle & Dameng Table Constraints and Triggers**: Expanding table nodes now displays unique constraints, check constraints, foreign keys, and triggers; Dameng resolves `TRIGGERING_TYPE` correctly and system-generated `SYS_C` non-null constraints are filtered out.
+- **Oracle Comprehensive Object Catalog**: Expanding schemas now supports materialized views, queues, types, packages, synonyms, Java, jobs, scheduler, database links, and recycle bin; groups are gracefully hidden when dictionary permissions are missing.
+- **Procedure and Function Parameters Display**: Expanding procedures and functions in Dameng and Oracle displays parameter names, directions (IN / OUT / IN OUT), and data types, with functions explicitly showing return types.
+- **Dameng Schema Table Triggers Group**: Added a "Table Triggers" group under Dameng schema nodes to display all table triggers owned by the current user.
+
+### Bug Fixes
+
+- **Remove Erroneous Context Menus**: Fixed an issue where the "Disconnect" context menu incorrectly appeared on non-connection nodes (such as tables, databases, and object groups), ensuring it only displays on connected root nodes.
+- **Oracle Connection String Service Name Resolution**: Fixed an issue where connecting with only host and port could route to the listener's default database (often CDB$ROOT in multitenant instances), ensuring the configured Service Name or SID is properly included in the connection string.
+
 ## [0.8.40] - 2026-10-25
 
 ### 优化
@@ -562,22 +590,3 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 - Fixed low contrast and illegible "Connection Successful" toast text under light themes such as Trae.
 
-## [0.8.11] - 2026-09-27
-
-### 改进与优化
-
-- 结果网格新增多选列批量复制列名与多列固定支持，优化列菜单展示。
-
-### 修复
-
-- 修复排序后斑马纹底色未按视觉顺序更新及子菜单靠边溢出的问题。
-
----
-
-### Improvements & Enhancements
-
-- Added batch column name copying and multi-column pinning in result grids, with streamlined header menus.
-
-### Bug Fixes
-
-- Fixed alternating row colors not updating by visual order after sorting, and resolved submenu viewport overflow issues.
