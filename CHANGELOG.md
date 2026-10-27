@@ -6,6 +6,30 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.42] - 2026-10-27
+
+### 新增
+
+- **支持 Apache Impala 数据库**：连接图库新增 Apache Impala 原生数据库卡片，预置默认端口 21050、NOSASL 认证模式及 `impala` Kerberos 服务名。
+
+### 修复
+
+- **HiveServer2 握手卡死修复**：修复 Hive 会话协议版本不匹配导致连接卡死超时的问题，增加协议版本向下自适应协商与重连机制，全部失败时提示核对 NOSASL 与 HTTP 端口。
+- **Trino 动态驱动依赖缺失修复**：修复 Trino 动态驱动因缺少 `form-data` 依赖导致已安装却报找不到 `trino-client` 的问题；补齐安装依赖并为损坏的驱动缓存提供自动重新下载机制。
+- **Trino 视图与特殊表名打开失败修复**：修复 Trino 视图检索以及包含点号的特殊表名（如 JMX 指标表）因未严格分段转义导致无法打开浏览的问题。
+
+---
+
+### Added
+
+- **Apache Impala Support**: Added native Apache Impala database card in the connection gallery, preset with default port 21050, NOSASL authentication mode, and `impala` Kerberos service name.
+
+### Bug Fixes
+
+- **HiveServer2 Handshake Hang Fix**: Fixed connection timeout and hang issues caused by Hive protocol version mismatches; added automatic downward protocol version negotiation and reconnection fallback with clear troubleshooting hints.
+- **Trino Dynamic Driver Dependency Fix**: Fixed an issue where the Trino driver failed to load `trino-client` due to missing `form-data` dependency; bundled required dependencies and added automatic re-download recovery for broken driver caches.
+- **Trino Views & Special Table Open Fix**: Fixed an issue where Trino views or dotted table names (such as JMX metrics tables) failed to open due to improper identifier quoting.
+
 ## [0.8.41] - 2026-10-26
 
 ### 新增
@@ -561,32 +585,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - Fixed unreadable dropdown text in dark mock data views and improved sort arrow contrast under specific host themes.
-
-## [0.8.12] - 2026-09-27
-
-### 改进与优化
-
-- **SQL 编辑器括号块快捷选中**：
-  - 光标在左括号后双击位置或紧邻空白，可一键选中该对括号内的完整 SQL 内容，大幅提升子查询局部执行与调试效率（兼容 VS Code / Cursor / Windsurf / Trae 等环境）。
-- **深色主题与图标视觉体验优化**：
-  - 资源树表、函数、事件、数据库等节点图标在深色模式下自适应提亮，视觉对比更清晰；
-  - 优化新建连接页面深色主题效果：移除数据库图标突兀的灰底，增强分类选中项可读性与卡片悬停边框质感。
-
-### 修复
-
-- 修复新建连接在 Trae 等浅色主题下测试连接成功提示文字对比度不足、难以看清的问题。
-
----
-
-### Improvements & Enhancements
-
-- **Quick Enclosed SQL Block Selection**:
-  - Double-clicking immediately after an opening parenthesis or adjacent whitespace automatically selects the entire enclosed SQL block, speeding up partial subquery execution (compatible with VS Code, Cursor, Windsurf, Trae, etc.).
-- **Dark Theme & Icon Visual Enhancements**:
-  - Explorer tree icons for tables, functions, events, and databases now dynamically adapt with brighter contrast in dark mode;
-  - Refined the New Connection view in dark themes by removing harsh grey backgrounds on database badges, improving category selection legibility, and sharpening card hover borders.
-
-### Bug Fixes
-
-- Fixed low contrast and illegible "Connection Successful" toast text under light themes such as Trae.
 

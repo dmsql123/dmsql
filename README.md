@@ -1,6 +1,6 @@
 # DMSQL **- Database Manager SQL Tool**
 
-面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL、MariaDB、TiDB、OceanBase、PolarDB MySQL、TDSQL MySQL、GoldenDB、Oracle、PostgreSQL、CockroachDB、YugabyteDB、Greenplum、PolarDB PostgreSQL、瀚高、海量、优炫、人大金仓、GaussDB、openGauss、SQL Server、Azure SQL、SQLite、DuckDB、ClickHouse、Doris、StarRocks、SelectDB、达梦 (Dameng)、Hive、Redis、Valkey、KeyDB、Trino** 等 33 种数据库。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
+面向开发者的 VS Code 全能数据库客户端扩展，**支持 MySQL、MariaDB、TiDB、OceanBase、PolarDB MySQL、TDSQL MySQL、GoldenDB、Oracle、PostgreSQL、CockroachDB、YugabyteDB、Greenplum、PolarDB PostgreSQL、瀚高、海量、优炫、人大金仓、GaussDB、openGauss、SQL Server、Azure SQL、SQLite、DuckDB、ClickHouse、Doris、StarRocks、SelectDB、达梦 (Dameng)、Hive、Impala、Redis、Valkey、KeyDB、Trino** 等 34 种数据库。连接管理、SQL 开发、可视化表设计、结果集分析、数据导入导出、模拟数据生成与性能监控一站式完成。
 
 - **官网**：[https://dmsql.top](https://dmsql.top)
 - **操作文档**：[https://dmsql.top/docs](https://dmsql.top/docs)
