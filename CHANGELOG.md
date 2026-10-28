@@ -6,6 +6,42 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.43] - 2026-10-28
+
+### 新增
+
+- **PostgreSQL / SQL Server 全对象元数据浏览**：
+  - PostgreSQL：模式下补齐外部表、聚合函数与独立索引，数据库节点支持浏览扩展插件 (Extensions)、事件触发器、表空间、外部数据封装器 (FDW) 与外部服务器。
+  - SQL Server：架构下补齐外部表、独立索引、序列、同义词、触发器与用户定义类型 (UDT)，数据库节点支持浏览数据库级触发器；展开过程与函数支持查看参数及返回值。
+- **ClickHouse 系统函数分组浏览**：数据库节点下新增函数分组，可直接查阅 `system.functions` 系统函数及说明，自动隐藏空的存储过程分组。
+
+### 优化
+
+- **连接失败诊断与错误提示增强**：优化数据库连接异常捕获与格式化展示，清晰呈现具体报错根因（如端口拒绝 `ECONNREFUSED`、鉴权失败等），避免泛化的空白提示。
+
+### 修复
+
+- **SQL Server 动态驱动下载 404 修复**：修复 SQL Server 驱动下载时请求不存在的 `tedious@18.7.1` 导致 404 失败的问题，升级为 `tedious@19.2.2` 并补齐启动依赖。
+- **SQL Server 过程与函数定义查看修复**：修复查看 SQL Server 函数和存储过程定义时误用 `SHOW CREATE` 报语法错误的问题，改为适配原生元数据解析。
+
+---
+
+### Added
+
+- **PostgreSQL & SQL Server Comprehensive Object Catalogs**:
+  - PostgreSQL: Added foreign tables, aggregate functions, and indexes under schemas; added extensions, event triggers, tablespaces, foreign data wrappers (FDW), and foreign servers under databases.
+  - SQL Server: Added foreign tables, indexes, sequences, synonyms, triggers, and user-defined types (UDT) under schemas, plus database triggers under databases; expanding routines now details parameters and return types.
+- **ClickHouse System Functions Group**: Added a functions group under ClickHouse database nodes to inspect system functions and descriptions from `system.functions`, automatically hiding empty procedure groups.
+
+### Improvements
+
+- **Connection Failure Diagnostics & Error Details**: Improved database connection error reporting to explicitly present underlying causes (such as port `ECONNREFUSED` or authentication rejections) instead of blank or generic failure notices.
+
+### Bug Fixes
+
+- **SQL Server Driver Download 404 Fix**: Fixed a 404 error caused by requesting non-existent `tedious@18.7.1`, upgrading to `tedious@19.2.2` with all necessary runtime dependencies bundled.
+- **SQL Server Routine Definition Syntax Fix**: Fixed a syntax error where viewing SQL Server function or procedure definitions incorrectly sent MySQL-style `SHOW CREATE` statements, replacing it with native catalog queries.
+
 ## [0.8.42] - 2026-10-27
 
 ### 新增
@@ -565,24 +601,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - Fixed cell selection background colors not applying to alternating light rows under custom themes.
-
-## [0.8.13] - 2026-09-28
-
-### 改进与优化
-
-- 结果网格全面对齐各宿主（Trae/CodeBuddy/Cursor）角标选中主题色与单元格选区手柄，优化新建连接浅色视觉层次。
-
-### 修复
-
-- 修复深色主题下模拟数据下拉菜单文字看不清及部分主题下排序箭头对比度不足的问题。
-
----
-
-### Improvements & Enhancements
-
-- Aligned grid selections and cell range handles with host badge themes (Trae, CodeBuddy, Cursor), and refined connection view styling.
-
-### Bug Fixes
-
-- Fixed unreadable dropdown text in dark mock data views and improved sort arrow contrast under specific host themes.
 
