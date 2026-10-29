@@ -6,6 +6,26 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.44] - 2026-10-29
+
+### 新增
+
+- **Doris 异步物化视图独立分组与刷新**：Doris 异步物化视图单独归入「物化视图」分组展示（不再与基表混在一起），支持专属的完整刷新 (`REFRESH MATERIALIZED VIEW ... COMPLETE`) 操作。
+
+### 修复
+
+- **Doris 无可用 Backend (BE) 时展开库报错修复**：修复在 Doris 仅有前端 (FE) 存活、无可用 BE 时因底层元数据字典查询报错导致展开数据库失败的问题；增加平滑降级容错，确保表与视图正常列出。
+
+---
+
+### Added
+
+- **Doris Asynchronous Materialized Views Group & Refresh**: Doris async materialized views are now grouped under "Materialized Views" instead of being mixed with base tables, with support for complete refresh (`REFRESH MATERIALIZED VIEW ... COMPLETE`).
+
+### Bug Fixes
+
+- **Doris Expansion Fix Without Active Backends**: Fixed an issue where expanding a Doris database failed when only frontends (FE) were active without available Backends (BE); added smooth fallback to ensure tables and views are listed reliably.
+
 ## [0.8.43] - 2026-10-28
 
 ### 新增
@@ -581,24 +601,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 - **Dirty State Indicator & Undo/Redo Granularity**:
   - Refined toolbar save button indicator for unsaved changes by highlighting the icon and displaying change counts within tooltips;
   - Fixed cells failing to revert to original values upon undo, and corrected undo/redo granularity to single-step history instead of wiping all unsaved changes simultaneously.
-
-## [0.8.14] - 2026-09-28
-
-### 改进与优化
-
-- 优化结果网格列头排序箭头与筛选图标视觉颜色对齐。
-
-### 修复
-
-- 修复自定义主题下浅色行单击单元格未生效选中底色的问题。
-
----
-
-### Improvements & Enhancements
-
-- Aligned column sort arrow colors with filter icons in result grids.
-
-### Bug Fixes
-
-- Fixed cell selection background colors not applying to alternating light rows under custom themes.
 
