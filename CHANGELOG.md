@@ -6,6 +6,46 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.8.45] - 2026-10-30
+
+### 新增
+
+- **MariaDB 序列分组支持**：MariaDB 数据库节点下新增「序列 (Sequences)」独立对象分组，便于直观浏览与管理序列。
+- **数据库级系统内置类型展示**：支持 Schema 的数据库将系统内置数据类型提升至数据库节点下展示（与 Schema 并列），用户自定义类型保留在各 Schema 下，层级更加直观。
+
+### 优化
+
+- **资源树层级与聚合函数展示优化**：
+  - 支持 Schema 的数据库将「性能监控」统一挂载在数据库节点上，与 Schema 保持并列；
+  - PostgreSQL 族聚合函数严格按聚合元数据登记归类，仅出现在「聚合函数」分组，不再与普通函数重复混杂。
+
+### 修复
+
+- **openGauss / GaussDB 兼容性修复**：
+  - 修复系统字典缺少 `attidentity` 字段导致表、视图和物化视图无法列出字段的问题；
+  - 修复会话视图缺少 `backend_type` 字段导致性能监控无法查看活动会话的问题；
+  - 修复查看存储过程和函数定义时包含冗余杂质的问题，精准提取并保留 `CREATE` 语句主体。
+
+---
+
+### Added
+
+- **MariaDB Sequence Group**: Added a dedicated "Sequences" object group under MariaDB database nodes for intuitive sequence browsing and management.
+- **Database-Level Built-in Types**: For databases with schemas, system built-in data types are now placed directly under the database node (alongside schemas), while user-defined types remain within their respective schemas.
+
+### Improvements
+
+- **Explorer Tree Hierarchy & Aggregate Functions Clean-up**:
+  - Placed the "Performance Monitor" node at the database root level alongside schemas for cleaner navigation;
+  - Categorized PostgreSQL-family aggregate functions strictly from `pg_aggregate`, displaying them exclusively under the aggregates group without mixing with regular functions.
+
+### Bug Fixes
+
+- **openGauss & GaussDB Compatibility Fixes**:
+  - Fixed an issue where tables, views, and materialized views failed to list columns on systems without `attidentity`;
+  - Fixed session monitor failures when `pg_stat_activity` lacks `backend_type`, smoothly displaying all active sessions;
+  - Refined procedure and function definition inspection to cleanly retain only the `CREATE` statement.
+
 ## [0.8.44] - 2026-10-29
 
 ### 新增
@@ -573,32 +613,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
   - Supports typing conditions prefixed with `and ` or `or ` to automatically assign logical connectors; allows quick round-trip editing by restoring items back to the input box;
   - Supports drag-and-drop reordering of filter conditions with automatic connector adjustments; pressing Enter or clicking Run automatically collects input and executes;
   - Filter counter badges now persist cleanly only while filtering is active.
-
-## [0.8.15] - 2026-09-29
-
-### 修复
-
-- **网格选择互斥与清理修复**：
-  - 修复单元格框选、行选择、列选择与全选状态冲突残留的问题，点击单元格自动清除行列全选，点击行号/列头自动清除单元格手柄，并支持 Esc、排序或点击空白区域取消选中；
-  - 修复左上角全选切换交互（已全选时再次点击取消全选），右键未选中单元格时自动纠正焦点。
-- **行内数据编辑行为修复**：
-  - 严格限制双击可编辑范围，多表关联查询严格禁止修改，仅支持表数据与单表简单查询；
-  - 修复双击单元格进入编辑时选区残留遮挡的问题，并解决鼠标松开时焦点意外丢失的缺陷。
-- **修改状态与撤销重做修复**：
-  - 修复未保存修改在工具栏保存按钮的视觉展示，采用图标高亮并于浮动提示中清晰标注变更计数；
-  - 修复撤销修改时单元格未正确显示修改前原值的问题，并将撤销/重做粒度精准修复为按单步编辑逐步回退，避免误丢全部修改。
-
----
-
-### Bug Fixes
-
-- **Grid Selection Exclusivity & Cleanup**:
-  - Fixed conflicting selection states between cell range, row, column, and select-all modes; selecting cells now clears row/column selections, while selecting row/column headers removes cell ranges and drag handles; Esc, sorting, or clicking outside/blank areas clears selections;
-  - Fixed corner select-all toggle interaction (clicking when fully selected now deselects), and right-clicking an unselected cell correctly focuses it.
-- **Inline Cell Editing Constraints & Focus**:
-  - Restricted inline editing strictly to table data browsing and single-table SELECT statements, rejecting multi-table joins;
-  - Fixed cell selection overlays obstructing the active editor upon double-click, and prevented unexpected focus loss upon mouse release.
-- **Dirty State Indicator & Undo/Redo Granularity**:
-  - Refined toolbar save button indicator for unsaved changes by highlighting the icon and displaying change counts within tooltips;
-  - Fixed cells failing to revert to original values upon undo, and corrected undo/redo granularity to single-step history instead of wiping all unsaved changes simultaneously.
 
