@@ -6,6 +6,50 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.0] - 2026-11-01
+
+### 新增
+
+- **Redis 族产品识别**：服务器信息与节点版本展示支持精准识别 Valkey 与 KeyDB 衍生产品，不再仅显示单一底层协议版本号。
+
+### 优化
+
+- **新建连接独立标签页打开**：编辑已有连接状态下点击新建连接支持多标签独立开启，避免无响应。
+- **OceanBase / MySQL 族元数据查询超时保护**：展开数据库元数据查询设置 12 秒超时保护并自动重连，彻底避免系统架构（如 OceanBase 的 LBACSYS、SYS 等系统模式）因复杂字典查询长期阻塞整条连接的问题。
+
+### 修复
+
+- **Doris / SelectDB 握手连接修复**：修复连接 SelectDB 与 Doris 时因客户端发送连接属性导致服务端 FE 握手阶段主动断开连接 (`The server closed the connection`) 的问题。
+- **StarRocks 同步物化视图支持与列查看修复**：修复 StarRocks 同步物化视图未在表列表中展示的问题（改从 `SHOW MATERIALIZED VIEWS` 动态补齐），并修复查看字段时因 `SHOW FULL COLUMNS` 报错改走 `DESC` 解析的问题。
+- **PostgreSQL 族 Schema 刷新与兼容性修复**：
+  - 修复多数据库切换后在 Schema 节点（如 public）点击刷新错误指向历史同名节点导致表和视图不刷新的问题；
+  - 修复 CockroachDB 缺少 `pg_total_relation_size` 导致展开表列表报错的问题，并具备实例级兼容性自适应记忆；
+  - 修复 Greenplum 6 缺少 `prokind` 列导致函数列表、参数及定义查看失败的问题；
+  - 修复例程参数数组以文本形式返回时解析多出空白参数的问题；
+  - 修复 Yugabyte 等环境查询 `pg_stat_replication` 长期挂起阻塞 Schema 展开的问题（跳过该查询并增加 3 秒语句超时保护），并在连接被服务端断开时支持树节点展开自动恢复重连。
+
+---
+
+### Added
+
+- **Redis Variant Product Identification**: Server info and node badges now accurately identify Valkey and KeyDB fork engines rather than only displaying the underlying redis_version number.
+
+### Improvements
+
+- **Multi-Tab Connection Creation**: Clicking "New Connection" while editing an existing connection now opens in a new tab reliably.
+- **MySQL & OceanBase Schema Expansion Timeout Protection**: Added a 12-second timeout protection with auto-reconnection for database metadata queries, preventing system schema inspections (e.g. LBACSYS / SYS on OceanBase) from hanging the entire connection.
+
+### Bug Fixes
+
+- **Doris & SelectDB Handshake Connection Fix**: Fixed connection failures with Doris and SelectDB caused by sending client connection attributes during handshake that triggered FE to disconnect (`The server closed the connection`).
+- **StarRocks Synchronous Materialized Views & Column Inspection Fix**: Supplemented missing StarRocks synchronous materialized views from `SHOW MATERIALIZED VIEWS` and supported `DESC` fallback when `SHOW FULL COLUMNS` fails.
+- **PostgreSQL-family Schema Refresh & Compatibility Fixes**:
+  - Fixed an issue where refreshing a Schema node (e.g. public) after switching databases incorrectly targeted the previous database's node without updating tables/views;
+  - Added graceful fallback and instance-level caching when CockroachDB lacks `pg_total_relation_size`;
+  - Fixed function list, parameter, and definition errors in Greenplum 6 when `prokind` is absent;
+  - Fixed routine parameter parsing when array returns as text, eliminating ghost parameters;
+  - Fixed Schema expansion hanging on Yugabyte caused by blocked `pg_stat_replication` queries, adding a 3-second query timeout and auto-reconnection recovery for disconnected sessions.
+
 ## [0.8.45] - 2026-10-30
 
 ### 新增
@@ -593,24 +637,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements & Enhancements
 
 - Refined grid display details.
-
-## [0.8.16] - 2026-09-30
-
-### 改进与优化
-
-- **结果网格多条件 WHERE 筛选重构升级**：
-  - 工具栏 WHERE 筛选支持多条件管理池：支持通过「+」号将当前条件收入列表，支持在 AND / OR 之间自由切换连接逻辑；
-  - 支持直接以 `and ` 或 `or ` 开头输入条件并自动识别提取连接词；支持将已有条件一键回填至输入框重新编辑；
-  - 条件列表支持拖拽灵活调整优先级排序，离开首位自动恢复连接词；回车或点击运行按钮自动收纳输入框并立即执行；
-  - 工具栏筛选徽标仅在条件生效时常驻展示筛选计数，视觉更清爽。
-
----
-
-### Improvements & Enhancements
-
-- **Result Grid Multi-Condition WHERE Filter Upgrade**:
-  - Upgraded toolbar WHERE filtering with a multi-condition list: use "+" to collect clauses into the list, with flexible AND / OR toggles on subsequent items;
-  - Supports typing conditions prefixed with `and ` or `or ` to automatically assign logical connectors; allows quick round-trip editing by restoring items back to the input box;
-  - Supports drag-and-drop reordering of filter conditions with automatic connector adjustments; pressing Enter or clicking Run automatically collects input and executes;
-  - Filter counter badges now persist cleanly only while filtering is active.
 
