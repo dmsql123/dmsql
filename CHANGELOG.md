@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.1] - 2026-11-02
+
+### 优化
+
+- 优化资源树加载速度，部分注册动作在加载展示树完成后进行。
+
+---
+
+### Improvements
+
+- Optimized explorer tree loading performance by deferring non-essential provider registrations until after the connection tree is fully loaded.
+
 ## [0.9.0] - 2026-11-01
 
 ### 新增
@@ -625,16 +637,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - **Dameng (DM) Driver safer-buffer Dependency Fix**: Included missing `safer-buffer` dependency in Dameng driver downloads, resolving an issue where the driver was marked ready but connection tests reported it missing; automatically repairs existing installations during connection test. (#1)
-
-## [0.8.17] - 2026-09-30
-
-### 改进与优化
-
-- 优化网格显示细节。
-
----
-
-### Improvements & Enhancements
-
-- Refined grid display details.
 
