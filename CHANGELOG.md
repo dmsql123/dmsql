@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.3] - 2026-11-03
+
+### 修复
+
+- **【紧急修复】项目连接转全局配置丢失**：修复把一条项目连接改回全局连接时，可能导致项目里其他已有连接被误清空的问题。
+
+---
+
+### Bug Fixes
+
+- **[Hotfix] Project Connections Wipe Fix**: Fixed an issue where changing a project connection back to global could accidentally clear other existing connections in the project.
+
 ## [0.9.2] - 2026-11-03
 
 ### 新增
@@ -619,30 +631,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes & Improvements
 
 - **Dameng (DM) Connection Stability**: Enhanced idle heartbeat keep-alive and improved session cleanup, resolving idle timeout disconnections and reconnection failures.
-
-## [0.8.19] - 2026-09-30
-
-### 修复
-
-- **【重要修复】达梦 (DM) 表定义与 DDL 获取导致实例卡死问题**：彻底移除对 `DBMS_METADATA.GET_DDL` 的依赖调用，解决特定版本达梦数据库实例在获取表 DDL 时被意外挂起、卡死（严重时需重启数据库实例）的重大缺陷；改用系统过程与元数据安全读取表定义。
-- **表详情面板生命周期与交互 Bug 修复**：
-  - 修复关闭表详情面板或性能监控面板后，再次点击无法重新打开的问题（纠正面板销毁与缓存清理时序）；
-  - 修复面板已打开时再次点击「查看建表 DDL」或「表详情」无法精准激活并切换对应页签的问题（统一达梦与 Hive 页签切换逻辑）。
-
-### 改进与优化
-
-- **表详情界面排版优化**：主键标识标签（PK）优化为强制单行展示，避免列宽收窄时被挤压换行，提升字段列表阅读体验。
-
----
-
-### Bug Fixes
-
-- **[Critical Fix] Dameng (DM) Table DDL Hanging & Instance Lockup**: Completely removed calls to `DBMS_METADATA.GET_DDL`, eliminating a critical issue where certain Dameng database instances would hang or freeze (requiring a service restart) during DDL generation; now safely retrieves table definitions via system procedures and metadata views.
-- **Table Details Panel Lifecycle & Tab Interaction Bug Fixes**:
-  - Fixed an issue where reopening Table Details or Performance Monitoring panels failed after closing (corrected disposal order and cache invalidation);
-  - Fixed tab switching so clicking "View Table DDL" or "Table Details" seamlessly jumps to and activates the target tab when the panel is already open (unified Dameng and Hive tab handling).
-
-### Improvements & Enhancements
-
-- **Table Details UI Layout Polish**: Enforced single-line rendering for Primary Key (PK) badges, preventing awkward wraps on narrow columns and improving field readability.
 
