@@ -6,6 +6,36 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.2] - 2026-11-03
+
+### 新增
+
+- **连接归属目录层级选择**：新建或编辑连接表单新增所属目录选择器，支持自由选择将连接存放在资源树根目录或任意指定文件夹下，便于多连接结构化组织。
+
+### 优化
+
+- **资源树连接节点视觉精简**：移除资源树上项目专属连接的「项目」文字徽标，保持树节点视觉简洁纯净。
+- **项目连接隔离与全局自动清理**：将已有连接变更为项目连接保存时，自动从全局连接名单中移除对应记录，避免在其他工作区意外暴露。
+
+### 修复
+
+- **项目连接读写竞态修复**：优化保存项目连接与文件监听读取的执行时序为串行队列，彻底修复刚保存的连接可能被旧文件快照覆盖导致连接丢失的问题。
+
+---
+
+### Added
+
+- **Target Folder Selection for Connections**: Added a folder selector in the connection form, enabling direct placement of new or edited connections into any explorer folder level or root directory.
+
+### Improvements
+
+- **Explorer Tree Label Streamlining**: Removed the "Project" badge from workspace connection nodes in the explorer for a cleaner, unified visual appearance.
+- **Project Connection Isolation & Global Cleanup**: Automatically purges identical connection records from the global store when migrated to workspace-scoped storage, preventing cross-workspace leakage.
+
+### Bug Fixes
+
+- **Project Connection Race Condition Fix**: Serialized project connection save and reload operations to eliminate race conditions where freshly saved connections could be overwritten by stale file snapshots.
+
 ## [0.9.1] - 2026-11-02
 
 ### 优化
@@ -615,26 +645,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements & Enhancements
 
 - **Table Details UI Layout Polish**: Enforced single-line rendering for Primary Key (PK) badges, preventing awkward wraps on narrow columns and improving field readability.
-
-## [0.8.18] - 2026-09-30
-
-### 新特性与改进
-
-- **SQL 编辑器自定义列注释**：SQL 编辑器右键菜单新增「自定义列注释」命令，自动在查询语句上方生成/更新 `/* @columns */` 注释块；执行后自定义注释将显示在网格列名下方并覆盖数据库默认注释（自动排除通配符）。
-- **结果网格列宽与注释展示优化**：列头注释不再强行撑开列宽，默认自适应列名与数据长度，注释过长时优雅省略截断，支持鼠标悬停浮窗查看完整注释。
-
-### 修复
-
-- **达梦 (DM) 数据库驱动依赖修复**：驱动下载流程补充安装缺失的 `safer-buffer` 依赖，解决此前因依赖不全导致“驱动已就绪但测试连接提示未安装”的异常，并支持测试连接时自动检测并补齐。 (#1)
-
----
-
-### Features & Improvements
-
-- **SQL Editor Custom Column Comments**: Added "Custom Column Comments" to the editor context menu to insert/refresh `/* @columns */` annotations above queries; defined comments display below column headers in the grid and override database comments (wildcards excluded).
-- **Result Grid Column Width & Comment Truncation**: Header comments no longer stretch default column widths; column width automatically fits column names and data, with long comments cleanly truncated and full text viewable on hover.
-
-### Bug Fixes
-
-- **Dameng (DM) Driver safer-buffer Dependency Fix**: Included missing `safer-buffer` dependency in Dameng driver downloads, resolving an issue where the driver was marked ready but connection tests reported it missing; automatically repairs existing installations during connection test. (#1)
 
