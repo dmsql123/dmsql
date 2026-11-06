@@ -6,6 +6,34 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.4] - 2026-11-06
+
+### 新增
+
+- **OceanBase Oracle 兼容模式租户支持**：全面适配 Oracle 模式的连接，元数据管理，数据字典查询，SQL 方言与标识符引用。
+
+### 优化
+
+- **连接表单文件夹选项联动**：优化新建与编辑连接表单中的「文件夹」选项，仅在保存位置选择「项目」时展示，切换为「全局」保存时自动隐藏并重置，界面更清晰。
+
+### 修复
+
+- **编辑连接保存后缓存清理与状态重置**：修复编辑连接保存后未自动断开原连接及未彻底清除该连接内存/磁盘元数据缓存，导致修改 DuckDB 数据库文件路径等配置后刷新表数量显示为 0 的问题；同时补齐连接节点、Schema 顶级库节点与资源树全局刷新时的元数据缓存联动清理。
+
+---
+
+### Added
+
+- **OceanBase Oracle Mode Tenant Support**: Fully adapted connection handling, metadata management, data dictionary queries, SQL dialect, and identifier quotes for Oracle mode.
+
+### Improvements
+
+- **Connection Form Folder Option Visibility**: Refined the "Folder" option in the connection form to display only when the save scope is set to "Project", automatically hiding and resetting it when switched to "Global".
+
+### Bug Fixes
+
+- **Connection Edit Cache Invalidation & Reconnect**: Fixed an issue where saving an edited connection did not disconnect the existing session or purge its in-memory and disk metadata caches, causing DuckDB and file databases to show 0 tables after updating file paths; also aligned metadata cache invalidation across connection nodes, schema nodes, and full explorer refreshes.
+
 ## [0.9.3] - 2026-11-03
 
 ### 修复
@@ -619,16 +647,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - **Connection Status Notification**: Fixed duplicate "Connecting..." notifications when reconnecting.
-
-## [0.8.20] - 2026-09-30
-
-### 修复与优化
-
-- **达梦 (DM) 数据库连接优化**：增强空闲连接心跳保活，优化断开会话的及时释放与回收，解决闲置超时断开及后续重连失败的问题。
-
----
-
-### Bug Fixes & Improvements
-
-- **Dameng (DM) Connection Stability**: Enhanced idle heartbeat keep-alive and improved session cleanup, resolving idle timeout disconnections and reconnection failures.
 
