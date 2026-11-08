@@ -6,6 +6,22 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.5] - 2026-11-08
+
+### 修复
+
+- **Oracle 连接服务名防篡改保护**：修复在资源树 Schema 节点新建 SQL 查询时，错误将 Oracle 服务名（Service Name / SID）覆盖为 Schema 用户名，导致后续重新连接报 `NJS-518` 无法连接的问题。
+- **Oracle 超大数值与雪花算法 ID 精度保障**：修复 Oracle 查询 `NUMBER(19)` / Java `Long` 字段及雪花算法 ID 超过 53 位时因 JavaScript 浮点数转换导致精度丢失的问题，原生以高精度文本输出。
+- **Oracle 与达梦日期时间本地格式化**：修复 Oracle 和达梦查询结果中的日期/时间字段显示为带 `T` 和 `Z` 的 UTC ISO 字符串问题，统一格式化为符合习惯的本地时间格式 `YYYY-MM-DD HH:mm:ss`。
+
+---
+
+### Bug Fixes
+
+- **Oracle Service Name Overwrite Protection**: Fixed an issue where opening a new SQL query on a Schema node mistakenly overwrote the Oracle Service Name / SID with the schema username, causing subsequent reconnection failures with `NJS-518`.
+- **Oracle Large Number & Snowflake ID Precision Fix**: Fixed precision loss on `NUMBER(19)`, Java `Long`, and 64-bit snowflake IDs exceeding 53 bits due to JavaScript IEEE-754 floating-point conversion by returning them as accurate strings.
+- **Oracle & Dameng DateTime Local Formatting**: Fixed query results displaying datetime values as UTC ISO strings with `T` and `Z`, standardizing them into the intuitive local format `YYYY-MM-DD HH:mm:ss`.
+
 ## [0.9.4] - 2026-11-06
 
 ### 新增
@@ -625,26 +641,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 - Refined grid display.
 - Added "Expand Height" setting (`dmsql.grid.expandHeight`, default 0 for unlimited) to allow configuring a max height cap for expanded rows.
-
-## [0.8.21] - 2026-10-06
-
-### 新特性与改进
-
-- **离线驱动指引**：连接表单新增驱动离线安装提示与文档跳转链接，方便离线/内网环境下快速配置。
-- **视图操作体验优化**：数据库资源管理器标题栏按钮改为常驻显示，操作更直观便捷。
-
-### 修复
-
-- **连接状态提示修复**：修复重新连接时偶发重复弹出多条「正在连接」通知的问题。
-
----
-
-### Features & Improvements
-
-- **Offline Driver Guidance**: Added offline driver installation instructions and documentation links to the connection form for restricted/intranet environments.
-- **View Header Usability**: Made action buttons in the Database Explorer header persistently visible for quicker access.
-
-### Bug Fixes
-
-- **Connection Status Notification**: Fixed duplicate "Connecting..." notifications when reconnecting.
 
