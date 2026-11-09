@@ -6,6 +6,24 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.7] - 2026-11-09
+
+### 优化
+
+- **数据库品牌图标与界面展示优化**：
+  - 优化资源树、编辑器 CodeLens 与连接切换弹窗（QuickPick）等多处图标展示；
+  - 各类协议兼容库全面改为展示自身正确的官方品牌图标，不再退化显示通用图标；
+  - 连接切换弹窗（QuickPick）支持展示彩色品牌图标与更精准的产品名称。
+
+---
+
+### Improvements
+
+- **Database Brand Icons and UI Display Improvements**:
+  - Refined database icon displays across the Explorer tree, editor CodeLens, and QuickPick menu;
+  - Compatible databases now display their accurate brand logos instead of generic fallback icons;
+  - QuickPick connection switcher now displays full-color official logos and precise product names.
+
 ## [0.9.6] - 2026-11-09
 
 ### 修复
@@ -627,16 +645,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Features & Improvements
 
 - **Dynamic SQL Variable Binding**: Added support for `${variable}` placeholders in SQL queries, prompting for variable values before executing the SQL.
-
-## [0.8.23] - 2026-10-08
-
-### 改进与优化
-
-- 优化结果网格行悬停联动高亮与展开箭头视觉细节。
-
----
-
-### Improvements & Enhancements
-
-- Refined result grid row hover highlight synchronization and expand arrow visuals.
 
