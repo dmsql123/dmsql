@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.6] - 2026-11-09
+
+### 修复
+
+- **Oracle 族结果集过滤语法修复**：修复在 Oracle、达梦及 OceanBase Oracle 模式租户下使用结果集 WHERE 筛选时，因派生子查询别名以下划线开头违背 Oracle 标识符规范导致报 ORA-00911: invalid character 语法错误的问题。
+
+---
+
+### Bug Fixes
+
+- **Oracle Family Result Filter Syntax Fix**: Fixed an ORA-00911: invalid character syntax error when filtering results via WHERE conditions in Oracle, Dameng, and OceanBase Oracle mode, caused by a derived subquery alias starting with an underscore.
+
 ## [0.9.5] - 2026-11-08
 
 ### 修复
@@ -627,18 +639,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements & Enhancements
 
 - Refined result grid row hover highlight synchronization and expand arrow visuals.
-
-## [0.8.22] - 2026-10-07
-
-### 新特性与改进
-
-- 优化网格展示。
-- 新增设置项「展开高度」（`dmsql.grid.expandHeight`，默认 0 不限高），支持自定义详情最大高度上限。
-
----
-
-### Features & Improvements
-
-- Refined grid display.
-- Added "Expand Height" setting (`dmsql.grid.expandHeight`, default 0 for unlimited) to allow configuring a max height cap for expanded rows.
 
