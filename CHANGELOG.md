@@ -6,6 +6,50 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.8] - 2026-11-10
+
+### 新增
+
+- **Oracle 族程序包（Package）可视化管理面板**：为 Oracle、OceanBase (Oracle 模式) 和达梦数据库新增专属程序包结构化面板，支持查看包头信息（状态、时间等）、子过程、函数、依赖关系，并支持包规范（声明）与包体（主体）独立分栏查看、编辑保存、编译及删除。
+
+### 优化
+
+- **DDL 智能排版美化引擎**：针对 DuckDB、SQLite、Oracle 等建表语句单行紧凑或凌乱的问题，新增方言感知的 DDL 自动换行、缩进美化与安全容错引擎。
+- **多数据库建表 DDL 完整度大幅补齐**：
+  - **DuckDB & SQLite**：建表 DDL 自动追加表注释、列注释以及独立的二级索引；
+  - **Oracle & OceanBase (Oracle 模式)**：在原生 DDL 基础上自动拼接表注释、列注释及独立二级索引；
+  - **PostgreSQL 家族（PG / 金仓 Kingbase / GaussDB / openGauss / 瀚高 HighGo）**：DDL 补齐唯一约束、检查约束、表/字段注释及独立二级索引；
+  - **SQL Server**：重构原生 T-SQL DDL 提取引擎，完整生成字段类型、自增 IDENTITY、默认值、主键约束、扩展属性说明及普通索引；
+  - **达梦 (Dameng)**：自动补齐表与字段的 COMMENT ON 注释。
+- **表详情标签视觉细节优化**：优化表详情面板中字段类型、主键、触发时机等徽标标签的底色与字色，文本垂直居中，消除深色模式下对比度不足的问题。
+
+### 修复
+
+- **PL/SQL 存储过程与复合块批量执行修复**：修复包含触发器、存储过程、函数和程序包的 SQL 脚本全选批量执行时，内部的分号被错误截断导致报错的问题，确保 `BEGIN ... END;` 块完整执行。
+- **CodeLens 复合块范围识别修复**：修复光标停留在触发器或过程末尾 `END;` 时被错误识别为独立语句块的问题，准确选中整个复合语句块。
+
+---
+
+### Added
+
+- **Visual Package Management Panel for Oracle Family**: Added dedicated structured package editors for Oracle, OceanBase (Oracle mode), and Dameng, featuring header metadata, subprograms (procedures/functions), dependencies, and split-pane viewing, editing, compiling, and dropping of package specification and body.
+
+### Improvements
+
+- **Intelligent DDL Formatter Engine**: Introduced a dialect-aware DDL formatting and indent engine with safe fallback, automatically prettifying compact single-line CREATE TABLE statements across DuckDB, SQLite, Oracle, and others.
+- **Comprehensive DDL Metadata & Index Enrichment**:
+  - **DuckDB & SQLite**: Automatically appends table/column comments and standalone secondary indexes to table DDL;
+  - **Oracle & OceanBase (Oracle mode)**: Supplements native DDL with table comments, column comments, and secondary index definitions;
+  - **PostgreSQL Family (PG, Kingbase, GaussDB, openGauss, HighGo)**: Enriches DDL with unique/check constraints, table/column COMMENT ON statements, and secondary indexes;
+  - **SQL Server**: Rebuilt native T-SQL DDL generation with full types, IDENTITY(1,1), defaults, PK constraints, MS_Description comments, and indexes;
+  - **Dameng**: Automatically appends external COMMENT ON table and column comments.
+- **Table Details Badge Visual Refinement**: Standardized badge background colors, font colors, and vertical alignment for field types, PK flags, and trigger timing, improving contrast under dark themes.
+
+### Bug Fixes
+
+- **PL/SQL Composite Block Batch Execution Fix**: Fixed an issue where internal semicolons within triggers, procedures, functions, and package bodies were mistakenly split during batch execution, ensuring full `BEGIN ... END;` blocks run reliably.
+- **CodeLens Composite Block Range Detection**: Fixed an issue where placing the cursor on a trailing `END;` of a trigger or procedure isolated it as a standalone statement instead of recognizing the entire composite block.
+
 ## [0.9.7] - 2026-11-09
 
 ### 优化
@@ -633,16 +677,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements & Enhancements
 
 - **Result Grid Header & Table Preview Polish**: Refined result grid header bar with dynamic SQL preview (truncated with hover tooltip) and connection info, and streamlined table preview titles and duration display.
-
-## [0.8.24] - 2026-10-08
-
-### 新特性与改进
-
-- **SQL 动态变量绑定**：新增支持在 SQL 中使用 `${变量}` 占位符语法，弹窗提示填入相应变量值，确认后运行SQL。
-
----
-
-### Features & Improvements
-
-- **Dynamic SQL Variable Binding**: Added support for `${variable}` placeholders in SQL queries, prompting for variable values before executing the SQL.
 
