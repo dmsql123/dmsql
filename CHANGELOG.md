@@ -6,6 +6,20 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.9] - 2026-11-10
+
+### 修复
+
+- **Oracle / 达梦列默认值与非空顺序修复**：修复 Oracle、达梦及 OceanBase (Oracle 模式) 在建表、加列与改列时，因默认值生成在非空之后（`NOT NULL DEFAULT`）导致报错 `ORA-00907: missing right parenthesis` 的语法缺陷，纠正为标准的 `DEFAULT ... NOT NULL` 顺序。
+- **表结构设计器外键映射与保存校验修复**：修复在可视化表设计器中编辑已有外键的表结构时，因元数据未完整拆解引用列对导致保存被误拦截的问题；全数据库引擎统一规范复合外键「本表列 -> 引用列」列对解析。
+
+---
+
+### Bug Fixes
+
+- **Oracle & Dameng Column Default and NOT NULL Ordering Fix**: Fixed an `ORA-00907: missing right parenthesis` syntax error in Oracle, Dameng, and OceanBase (Oracle mode) when creating or altering columns caused by placing default values after NOT NULL (`NOT NULL DEFAULT`), correcting the syntax order to `DEFAULT ... NOT NULL`.
+- **Table Structure Designer Foreign Key Mapping & Save Validation Fix**: Fixed an issue where saving an existing table with foreign keys was falsely blocked due to incomplete referenced column pair parsing; standardized composite FK column-to-referenced-column mapping across all database engines.
+
 ## [0.9.8] - 2026-11-10
 
 ### 新增
@@ -665,16 +679,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - **Pivot Aggregation with Filter Fix**: Fixed incorrect summary aggregation in pivot mode when data filtering is applied.
-
-## [0.8.25] - 2026-10-09
-
-### 改进与优化
-
-- **结果集顶部栏与表数据预览标题优化**：优化结果集顶部栏信息排版，左侧动态显示当前 SQL（超长省略，悬停查看全文），右侧统一标注连接与数据库；精简表数据预览标题及耗时呈现。
-
----
-
-### Improvements & Enhancements
-
-- **Result Grid Header & Table Preview Polish**: Refined result grid header bar with dynamic SQL preview (truncated with hover tooltip) and connection info, and streamlined table preview titles and duration display.
 
