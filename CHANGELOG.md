@@ -6,6 +6,32 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.10] - 2026-11-12
+
+### 优化
+
+- **单元格详情编辑器升级**：单元格编辑弹窗的文本页改用与包声明面板相同的编辑器，支持 JSON 语法高亮、行号显示、括号匹配，以及多行格式化后的对象/数组折叠；编辑区高度自适应弹窗大小，文本页仅保留编辑器自身滚动条。
+- **结果网格自动列宽与配置优化**：自动列宽默认上限为 `360px`、短列下限为 `120px`（长文本悬停可查看全文，且支持手动拖拽调宽）；底栏设置（齿轮图标）及扩展配置均支持调整这两个阈值（`dmsql.grid.columnMinWidth` / `dmsql.grid.columnMaxWidth`）。
+
+### 修复
+
+- **JSON 单元格原文展示与写回修复**：修复 PostgreSQL（`json` / `jsonb`）与 MySQL（`JSON`）列在结果网格中显示为 `[object Object]` 的问题，现在按数据库原文（保留原始空格与键序，例如 `{"n": 1, "name": "ann"}`）展示，列表头图标使用 `{ }`，编辑后按文本写回。
+- **多语句执行记录丢失修复**：修复一次运行建表、插入等多条 SQL 语句且结果页面尚未打开完时，部分执行记录丢失的问题，确保结果页完整列出每一条语句的执行记录。
+- **当前库与 Schema 分级切换修复**：针对多层级数据库引擎规范当前库 / Schema 逐级切换流程与会话作用域。
+
+---
+
+### Improvements
+
+- **Cell Inspector Text Editor Upgrade**: Upgraded the Text tab in the cell editor modal to use the same editor as the Package editor, adding JSON syntax highlighting, line numbers, bracket matching, and folding for multi-line formatted objects and arrays. The editor area adapts to modal height with only its own scrollbar.
+- **Result Grid Auto Column Width & Settings**: Set default auto-column width bounds to `120px` minimum and `360px` maximum (full content on hover, and manual column resizing remains supported). Both limits can be customized via the bottom-bar settings gear or extension settings (`dmsql.grid.columnMinWidth` / `dmsql.grid.columnMaxWidth`).
+
+### Bug Fixes
+
+- **JSON Cell Raw Display & Text Write-back Fix**: Fixed an issue where PostgreSQL (`json` / `jsonb`) and MySQL (`JSON`) columns displayed as `[object Object]`. Cells now render verbatim raw database text (preserving spacing and key order, e.g., `{"n": 1, "name": "ann"}`), use `{ }` in column headers, and write back as text after editing.
+- **Multi-Statement Execution Records Loss Fix**: Fixed an issue where running multiple statements (such as `CREATE TABLE` and `INSERT`) while the results view had not finished opening could drop execution records, ensuring every statement is listed in the results tab.
+- **Database & Schema Multi-Level Scope Switching Fix**: Aligned active database and schema multi-level switching flow and session scope across database engines.
+
 ## [0.9.9] - 2026-11-10
 
 ### 修复
@@ -657,26 +683,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 - **Resource Tree Child Node Cleanup**: Cleaned up invalid and redundant action icons and context menus on table child nodes.
 - **Accurate Index Count in Resource Tree**: Index count badges on resource tree nodes now accurately reflect the real index list count across all databases, including secondary and composite indexes.
-
-## [0.8.26] - 2026-10-10
-
-### 新特性与改进
-
-- **透视模式交互与导出升级**：优化透视模式交互，避免与基础数据查询互相干扰；数据导出支持直接导出透视分析结果。
-- **资源树行数统计与缓存优化**：优化数据表行数统计刷新逻辑与会话缓存机制，提升行数准确度与浏览性能。
-
-### 修复
-
-- **透视筛选汇总数据修复**：修复在数据筛选状态下透视模式汇总数据计算错误的问题。
-
----
-
-### Features & Improvements
-
-- **Pivot Mode Usability & Export**: Refined pivot mode interactions to prevent interference with basic data querying, and added support for exporting pivot table results directly.
-- **Resource Tree Row Count & Cache Polish**: Optimized table row count calculation and session caching mechanisms for improved accuracy and performance.
-
-### Bug Fixes
-
-- **Pivot Aggregation with Filter Fix**: Fixed incorrect summary aggregation in pivot mode when data filtering is applied.
 
