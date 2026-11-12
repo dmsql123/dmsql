@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.11] - 2026-11-12
+
+### 修复
+
+- **行展开详情字段名排版修复**：优化结果网格行展开详情的字段名列宽与换行逻辑，避免短字段名被异常折行，展开区域高度随内容自适应。
+
+---
+
+### Bug Fixes
+
+- **Row Detail Field Name Layout Fix**: Improved field-name column sizing and wrapping in expanded row details to avoid unintended line breaks on short field names, with panel height adapting to content.
+
 ## [0.9.10] - 2026-11-12
 
 ### 优化
@@ -669,18 +681,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - **Column Filter Menu**: Fixed unexpected menu closure when scrolling through the filter value list.
-
-## [0.8.27] - 2026-10-11
-
-### 改进与优化
-
-- **资源树子节点操作净化**：全面清理数据表子节点无效冗余操作图标以及右键菜单。
-- **资源树索引计数准确度提升**：资源树索引节点数量统一改为读取各库实际索引列表统计，准确反映二级索引及复合索引数量。
-
----
-
-### Improvements & Enhancements
-
-- **Resource Tree Child Node Cleanup**: Cleaned up invalid and redundant action icons and context menus on table child nodes.
-- **Accurate Index Count in Resource Tree**: Index count badges on resource tree nodes now accurately reflect the real index list count across all databases, including secondary and composite indexes.
 
