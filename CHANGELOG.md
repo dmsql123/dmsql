@@ -6,6 +6,26 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.12] - 2026-11-13
+
+### 新增
+
+- **资源树数据表筛选记忆**：新增 `dmsql.tree.rememberTableFilter` 设置项（默认关闭），开启后可跨会话记住每个连接下勾选的数据表筛选状态，重新打开编辑器仍保持生效。(#9)
+
+### 修复
+
+- **结果网格日期时间回写修复**：优化各数据库引擎在结果网格编辑保存日期与时间字段时的 SQL 生成逻辑。Oracle、达梦规范使用 `TO_DATE` / `TO_TIMESTAMP` 避免 `ORA-01861` 格式错误；PostgreSQL、MySQL、SQL Server、ClickHouse、DuckDB 等按列类型生成标准字面量，纯日期列不再写入多余的时间部分。(#8)
+
+---
+
+### Added
+
+- **Remember Table Filter in Resource Tree**: Added `dmsql.tree.rememberTableFilter` setting (disabled by default) to optionally persist checked table filter states per connection across editor restarts. (#9)
+
+### Bug Fixes
+
+- **Result Grid Date/Time Persistence Fix**: Improved SQL generation when saving edited date and datetime cells across database engines. Oracle and Dameng now use `TO_DATE` / `TO_TIMESTAMP` functions to avoid `ORA-01861` format errors; PostgreSQL, MySQL, SQL Server, ClickHouse, and DuckDB format literals strictly according to column types, preventing redundant time components in date-only columns. (#8)
+
 ## [0.9.11] - 2026-11-12
 
 ### 修复
@@ -659,26 +679,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 
 - **SQL Favorites**: Added a dedicated sidebar view for SQL Favorites, supporting saving selected SQL, multi-level folder organization, drag-and-drop grouping, and quick actions to open, copy, or insert at the cursor.
 - **Full Table Hover Preview**: SQL editor table hover tooltip now displays all columns in full without truncation limits.
-
-## [0.8.28] - 2026-10-12
-
-### 改进与优化
-
-- **透视模式体验升级**：透视模式支持拖拽调整列顺序，支持独立快速搜索。
-- **数据查询加载增强**：查询数据新增全部加载功能。
-
-### 修复
-
-- **列筛选菜单滚动修复**：解决列筛选菜单鼠标滚动导致菜单关闭的问题。
-
----
-
-### Improvements & Enhancements
-
-- **Pivot Mode Usability**: Supports drag-and-drop column reordering and independent quick search.
-- **Load All Rows**: Added one-click action to load all query rows.
-
-### Bug Fixes
-
-- **Column Filter Menu**: Fixed unexpected menu closure when scrolling through the filter value list.
 
