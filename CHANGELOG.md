@@ -6,6 +6,38 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.14] - 2026-11-14
+
+### 新增
+
+- **存储过程与函数可视化管理面板**：资源树中的存储过程与函数节点支持双击或点击悬停图标打开专属可视化管理面板，右键支持「打开可视化管理」「查看定义 SQL 语句」与「生成运行 SQL」。面板顶部展示基础元数据与有效状态并支持一键「生成调用」与「刷新」；「声明」页签支持源码编辑、编译保存、编译错误行内展示及导入导出；「参数」页签展示函数返回值与参数详情；「依赖关系」页签按引擎能力展示依赖项与被依赖项并支持点击跳转定位。
+- **Oracle / 达梦模式触发器查看与编译**：支持双击节点或点击悬停图标，在绑定当前连接与模式的 SQL 编辑器标签页中打开触发器完整 DDL 进行查看与编译。
+- **资源树对象交互与 DDL 查看补全**：
+  - **索引**（Oracle / PostgreSQL / SQL Server）：双击或点击悬停图标跳转至所属表的「索引列表」详情页并高亮定位，右键支持查看 `CREATE INDEX` DDL；
+  - **序列**（Oracle / 达梦 / OceanBase Oracle / PostgreSQL 系 / SQL Server / MariaDB）：双击或点击悬停图标弹出 `CREATE SEQUENCE` DDL；
+  - **同义词与通用目录项**：Oracle / SQL Server 同义词右键新增「打开目标表」与「查看 DDL」，通用目录项补齐右键「复制名称」。
+- **SQL Server 过程与函数模板补全**：补齐 SQL Server 新建存储过程与标量函数的 `CREATE OR ALTER` DDL 模板。
+
+### 优化
+
+- **Oracle / 达梦程序包防误触交互优化**：资源树「包（Package）」及包内成员节点改为双击打开可视化包管理面板，避免单击展开节点时误弹窗（悬停图标与右键「打开包」保持一键打开）。
+
+---
+
+### Added
+
+- **Visual Routine (Procedure & Function) Management Panel**: Double-clicking or clicking the hover icon on procedure/function nodes opens a dedicated visual management panel (with context menu actions to manage, view definition SQL, or generate execution SQL). Features a metadata and validity header with one-click Call Generation and Refresh, a Declaration tab for editing, compiling, inline error display, and import/export, a Parameters tab for return type and parameter details, and an adaptive Dependencies tab with click-to-locate tree navigation.
+- **Oracle & Dameng Schema Trigger DDL Editing**: Double-clicking or clicking the hover icon on schema trigger nodes opens the formatted trigger DDL directly in a bound SQL editor tab for viewing and compilation.
+- **Resource Tree Object Interactions & DDL Viewing**:
+  - **Indexes** (Oracle, PostgreSQL, SQL Server): Double-clicking or clicking the hover icon jumps to the owning table's Indexes tab with the target row highlighted; context menu supports viewing `CREATE INDEX` DDL.
+  - **Sequences** (Oracle, Dameng, OceanBase Oracle, PostgreSQL family, SQL Server, MariaDB): Double-clicking or clicking the hover icon opens `CREATE SEQUENCE` DDL in an editor tab.
+  - **Synonyms & Catalog Items**: Added "Open Target Table" and "View DDL" context actions for Oracle/SQL Server synonyms, and "Copy Name" for catalog items.
+- **SQL Server Routine Creation Templates**: Added `CREATE OR ALTER` DDL templates for new SQL Server procedures and scalar functions.
+
+### Improvements
+
+- **Oracle & Dameng Package Click Polish**: Changed package and package member nodes in the resource tree to open the visual Package panel on double-click, preventing accidental popups when expanding nodes (hover icon and context menu continue to open directly).
+
 ## [0.9.13] - 2026-11-14
 
 ### 优化
@@ -659,24 +691,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 - **Explorer Context Menu**: Reorganized explorer context menu ordering and visibility logic.
 - **Streamlined SQL Error Messages**: Improved error banners by highlighting the core error summary and error code while eliminating cluttered internal stack traces.
 - **Connection Concurrency Protection**: Added run locks per connection to prevent command collisions during concurrent execution on the same database session.
-
-## [0.8.30] - 2026-10-13
-
-### 改进与优化
-
-- **连接节点交互与菜单优化**：未连接的节点右侧新增快捷连接图标（连接成功后自动隐藏）；连接节点右键菜单新增「断开连接」选项。
-
-### 修复
-
-- **单连接独立重连修复**：修复点击单个连接时误触发其他失败连接一并重连的问题，并精简连接失败提示。
-
----
-
-### Improvements & Enhancements
-
-- **Connection Node Actions & Context Menu Polish**: Added an inline quick-connect icon on disconnected nodes (auto-hidden when connected), and added a "Disconnect" option to the connection context menu.
-
-### Bug Fixes
-
-- **Isolated Single Connection Retry**: Fixed an issue where connecting a single node unintentionally triggered reconnection attempts on other failed connections, and streamlined connection failure messages.
 
