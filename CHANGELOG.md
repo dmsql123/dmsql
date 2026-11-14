@@ -6,6 +6,20 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.13] - 2026-11-14
+
+### 优化
+
+- **高危 SQL 拦截与确认体验优化**：执行 DROP、TRUNCATE 或无 WHERE 的 DELETE / UPDATE 时，统一采用快捷确认弹窗（支持一键确认/取消，按 Esc 亦可取消）。
+- **表详情触发器排版与联动增强**：表详情面板中触发器定义默认单行紧凑展示（超长自动省略截断，列宽自适应避免撑出横向滚动条），支持点击「查看详情」弹窗查看排版美化后的完整 SQL 并快捷复制；在资源树点击触发器或模式下的「表触发器」节点时，精准联动跳转至对应表详情的触发器标签页。(#10)
+
+---
+
+### Improvements
+
+- **Dangerous SQL Guard & Confirmation Polish**: Streamlined confirmation for DROP, TRUNCATE, and unconstrained DELETE / UPDATE statements into a quick action prompt (confirm/cancel in one click, or press Esc to cancel).
+- **Table Details Trigger Layout & Navigation Polish**: Trigger definitions in the table details panel now display compactly on a single line with dynamic column width to prevent unintended horizontal scrollbars, featuring a "View Details" modal for formatted SQL preview and quick copying; clicking trigger nodes or "Table Triggers" in the resource tree now seamlessly navigates to the triggers tab of the corresponding table details panel. (#10)
+
 ## [0.9.12] - 2026-11-13
 
 ### 新增
@@ -665,18 +679,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - **Isolated Single Connection Retry**: Fixed an issue where connecting a single node unintentionally triggered reconnection attempts on other failed connections, and streamlined connection failure messages.
-
-## [0.8.29] - 2026-10-13
-
-### 新特性与改进
-
-- **SQL 收藏夹**：新增独立侧边栏 SQL 收藏夹，支持将选中 SQL 加入收藏、多级文件夹管理、拖拽归类，以及一键打开、复制或插入到当前光标处。
-- **表名悬停预览增强**：SQL 编辑器表名悬停提示支持完整展示全部字段，不再限制显示列数。
-
----
-
-### Features & Improvements
-
-- **SQL Favorites**: Added a dedicated sidebar view for SQL Favorites, supporting saving selected SQL, multi-level folder organization, drag-and-drop grouping, and quick actions to open, copy, or insert at the cursor.
-- **Full Table Hover Preview**: SQL editor table hover tooltip now displays all columns in full without truncation limits.
 
