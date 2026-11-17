@@ -6,6 +6,28 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.15] - 2026-11-17
+
+### 新增
+
+- **跨宿主 MCP stdio 桥接接入**：新增「复制 MCP 客户端配置（stdio 桥接）」命令，支持 CodeBuddy、Antigravity、Windsurf、Kiro、Trae 等 AI 工具通过标准 stdio 配置接入当前窗口的 DMSQL MCP 服务，并在检测到已知宿主环境时支持快捷写入其全局 MCP 配置文件。
+
+### 修复
+
+- **未保存 SQL 笔记本重启恢复修复**：修复重启 IDE 后未保存的 SQL 笔记本（`.dmsnb`）偶发提示无法打开的问题。
+- **多宿主环境 MCP 登记与传输稳定性修复**：优化 Cursor 等多宿主环境下的 MCP 适配与连接稳定性，同时兼容 Streamable HTTP 与 HTTP+SSE 协议并隔离会话避免串话；执行查询未指定连接时支持自动匹配当前连接、同名库连接或唯一已保存连接。
+
+---
+
+### Added
+
+- **Cross-Host MCP stdio Bridge Integration**: Added the "Copy MCP Client Config (stdio Bridge)" command, enabling AI tools such as CodeBuddy, Antigravity, Windsurf, Kiro, and Trae to connect to the active window's DMSQL MCP service via standard stdio configuration, with one-click global MCP config writing for supported hosts.
+
+### Bug Fixes
+
+- **Unsaved SQL Notebook Restart Recovery Fix**: Fixed an issue where unsaved SQL Notebooks (`.dmsnb`) could fail to open immediately after an IDE restart.
+- **Multi-Host MCP Registration & Transport Stability Fix**: Improved MCP host adaptation and transport stability in Cursor and other environments, supporting both Streamable HTTP and HTTP+SSE with isolated client sessions to prevent cross-talk, and automatically matching the active, database-matching, or sole saved connection when no connection ID is specified.
+
 ## [0.9.14] - 2026-11-14
 
 ### 新增
@@ -667,28 +689,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements
 
 - **Connection Node Brand Identification**: Explorer root connection node icons and tooltips accurately reflect the specific database product; gallery favorites now support starring individual product cards independently.
-
-## [0.8.31] - 2026-10-14
-
-### 新增
-
-- **SQL 笔记本（.dmsnb）**：全新支持交互式 SQL 笔记本，可在同一文档内混合编写 Markdown 说明与 SQL 语句。支持逐格顺序执行并在单元格下方直接渲染数据网格（可一键展开至主结果面板）；支持运行前参数变量配置；支持通过数据库节点右键菜单或快捷按钮一键创建。
-
-### 优化
-
-- **资源树右键菜单**：优化资源树右键菜单顺序以及显示逻辑。
-- **SQL 执行错误提示精简**：优化执行失败提示，突出展示核心错误摘要与数据库错误码，剔除冗长底层调用堆栈。
-- **单连接并发执行保护**：增加同连接运行状态保护，防止同一数据库连接并发执行导致的连接冲突。
-
----
-
-### Added
-
-- **Interactive SQL Notebook (.dmsnb)**: Native support for interactive SQL notebooks, allowing Markdown notes and executable SQL cells in a single document. Features sequential cell execution with inline grid results (expandable to the main result panel), pre-execution variable prompts, and dedicated creation actions from database context menus or inline buttons.
-
-### Improvements
-
-- **Explorer Context Menu**: Reorganized explorer context menu ordering and visibility logic.
-- **Streamlined SQL Error Messages**: Improved error banners by highlighting the core error summary and error code while eliminating cluttered internal stack traces.
-- **Connection Concurrency Protection**: Added run locks per connection to prevent command collisions during concurrent execution on the same database session.
 
