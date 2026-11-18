@@ -6,6 +6,34 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.16] - 2026-11-18
+
+### 优化
+
+- **资源树分层精准刷新体验优化**：
+  - **提升列表打开速度，行数后台补算**：展开或刷新库 / Schema 时立即显示表与对象列表，不再被行数统计卡住，小表精确行数改为后台异步补算；
+  - **按需局部刷新，减少大库耗时**：刷新表、视图、过程、函数、包、序列、事件等分组时只重查该分组本身；刷新单张表时自动更新字段缓存，让补全与悬停提示即时生效；
+  - **筛选提示与菜单更名**：开启表筛选后若刷新出被隐藏的新表，状态栏会给予轻量提示；物化视图刷新数据操作更名为「刷新数据」，避免与结构刷新混淆。
+
+### 修复
+
+- **多层级拓扑跨库串库与缓存隔离修复**：修复 PostgreSQL、SQL Server、DuckDB 多层级结构下跨库切换或刷新时，不同数据库下同名 Schema（如 `public`）及其下级分组缓存互相覆盖的问题；刷新指定数据库节点仅失效该库自身缓存。
+- **SSH 隧道握手超时与自动重试修复**：将 SSH 隧道握手等待超时由 5 秒延长至 20 秒，并在首次握手超时后自动重试一次，提升高延迟网络环境下的连接成功率。
+
+---
+
+### Improvements
+
+- **Resource Tree Layered & Targeted Refresh Polish**:
+  - **Faster List Loading with Background Row Counts**: Expanding or refreshing a database/schema now shows tables and objects right away without blocking, while exact row counts for small tables load asynchronously in the background;
+  - **Scoped Partial Refresh**: Refreshing object groups (tables, views, procedures, functions, packages, sequences, events) reloads only that category; refreshing a single table refreshes its column cache so IntelliSense and hover tooltips update immediately;
+  - **Filter Notice & Action Clarity**: Shows a lightweight status bar notice when a refresh finds new tables hidden by an active filter; renamed the materialized view data refresh action to "Refresh Data" to avoid confusion with metadata refresh.
+
+### Bug Fixes
+
+- **Multi-Level Cross-Database Cache Isolation Fix**: Fixed an issue in PostgreSQL, SQL Server, and DuckDB where switching or refreshing across databases with identically named schemas (such as `public`) could overwrite child group references and caches; refreshing a database node now invalidates only that database's own cache.
+- **SSH Tunnel Handshake Timeout & Retry Fix**: Extended the SSH tunnel handshake timeout from 5s to 20s with one automatic retry on initial timeout, improving connection reliability over high-latency networks.
+
 ## [0.9.15] - 2026-11-17
 
 ### 新增
@@ -659,34 +687,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - **HTTP Proxy Data & Connection Stability**: Fixed an issue where the initial chunk of data following the HTTP CONNECT handshake could be dropped, and resolved an issue where idle connections were prematurely terminated by timeouts.
-
-## [0.8.32] - 2026-10-15
-
-### 新增
-
-- **数据库接入扩展至 33 种**：新建连接向导（图库）新增 17 款常用协议兼容数据库，配备专属品牌图标与默认端口：
-  - MySQL 系：TiDB、OceanBase（MySQL 模式）、PolarDB MySQL、TDSQL MySQL、GoldenDB；
-  - PostgreSQL 系：CockroachDB、YugabyteDB、Greenplum、PolarDB PostgreSQL、瀚高数据库 (HighGo)、海量数据库 (Vastbase)、优炫数据库 (UXDB)；
-  - SQL Server 系：Azure SQL；
-  - Doris 系：StarRocks、SelectDB；
-  - Redis 系：Valkey、KeyDB。
-
-### 优化
-
-- **连接节点品牌识别**：资源树根节点图标与悬停提示精准跟随所选具体数据库产品；图库收藏支持按具体数据库卡片独立加星。
-
----
-
-### Added
-
-- **Expanded Database Catalog (33 Databases)**: Added 17 protocol-compatible database options to the connection wizard gallery, each with dedicated branding icons and default ports:
-  - MySQL family: TiDB, OceanBase (MySQL mode), PolarDB MySQL, TDSQL MySQL, GoldenDB;
-  - PostgreSQL family: CockroachDB, YugabyteDB, Greenplum, PolarDB PostgreSQL, HighGo, Vastbase, UXDB;
-  - SQL Server family: Azure SQL;
-  - Doris family: StarRocks, SelectDB;
-  - Redis family: Valkey, KeyDB.
-
-### Improvements
-
-- **Connection Node Brand Identification**: Explorer root connection node icons and tooltips accurately reflect the specific database product; gallery favorites now support starring individual product cards independently.
 
