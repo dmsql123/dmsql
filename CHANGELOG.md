@@ -6,6 +6,20 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.17] - 2026-11-24
+
+### 新增
+
+- **无编辑器独立运行 MCP 与命令行工具（CLI）**：新增独立运行的 `dmsql` 命令行与 MCP 服务能力。即使关闭编辑器，Claude Code、Claude Desktop、Codex 等 AI 客户端也可复用已保存的多方言连接配置与加密凭据直连数据库（不暴露密码）；编辑器打开时自动转发至编辑器内连接。详见 [独立 MCP 与 CLI 官方文档](https://dmsql.top/docs/独立MCP与CLI)。
+- **一键安装命令行工具**：命令面板新增「安装命令行工具 (CLI)」（`DMSQL: Install CLI`），可快速将 `dmsql` 安装至本地目录与系统环境变量 `PATH`，并支持通过 `--app` 参数切换不同编辑器的连接配置，无编辑器独立运行 MCP 与命令行工具首次使用前需要安装。
+
+---
+
+### Added
+
+- **Standalone MCP & CLI Support**: Added standalone `dmsql` CLI and MCP server support. External AI clients such as Claude Code, Claude Desktop, and Codex can reuse saved multi-dialect connections and encrypted credentials to connect directly to databases even when the IDE is closed (without exposing passwords), and automatically forward to the active IDE connection pool when open. See the [Standalone MCP & CLI Guide](https://dmsql.top/docs/standalone-mcp-cli).
+- **One-Click CLI Installation**: Added the "Install CLI" (`DMSQL: Install CLI`) command in the Command Palette to install `dmsql` to the local user directory and `PATH`, with `--app` support for switching between different editor connection profiles (required before first-time use of standalone MCP & CLI).
+
 ## [0.9.16] - 2026-11-18
 
 ### 优化
@@ -665,26 +679,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements
 
 - **Custom Theme Scrollbar Adaptation**: Scrollbars now dynamically adapt to custom theme color configurations, providing enhanced visual unity in high-contrast theme setups.
-
-## [0.8.33] - 2026-10-15
-
-### 优化
-
-- **SSH 隧道主机指纹核对**：首次连接 SSH 隧道或主机指纹变更时，在发送登录凭据前主动提示核对主机指纹；支持「记住并继续」、「仅本次继续」或「拒绝」，指纹独立存储不修改系统 `known_hosts`。
-- **代理协议类型引导提示**：当系统代理为 SOCKS 协议时，提供清晰引导提示改用 Socks 代理配置。
-
-### 修复
-
-- **HTTP 代理数据与连接稳定性修复**：修复 HTTP CONNECT 握手后紧邻的首截数据可能丢失的问题，并解决空闲连接被超时错误误掐断的问题。
-
----
-
-### Improvements
-
-- **SSH Tunnel Host Fingerprint Verification**: Prompts to verify host key fingerprints before sending authentication credentials on first connection or when host key changes; supports "Remember", "This time only", or "Reject" without modifying the system `known_hosts` file.
-- **Proxy Protocol Guidance**: Displays clear actionable guidance to switch to Socks proxy when the detected system proxy uses SOCKS.
-
-### Bug Fixes
-
-- **HTTP Proxy Data & Connection Stability**: Fixed an issue where the initial chunk of data following the HTTP CONNECT handshake could be dropped, and resolved an issue where idle connections were prematurely terminated by timeouts.
 
