@@ -17,6 +17,7 @@
 
 - **中英文双语支持**：所有相关页面以及配置项均默认自动根据编辑器设定语言页面进行中英文自适应，同时支持通过配置项 `Dmsql: Locale` 自主配置语言设定。
 - **隐私安全**：密码通过本地 VS Code SecretStorage 硬件/系统级安全加密，安全保密，本地化保存。
+- **内置 MCP 与无编辑器独立 MCP / CLI 支持**：开箱支持 Cursor、VS Code 等编辑器内 AI 智能体直接感知库表结构与执行 SQL（详见 [MCP 支持](https://dmsql.top/docs/MCP)）；同时提供 `dmsql` 命令行与双模 stdio MCP（详见 [独立 MCP 与 CLI](https://dmsql.top/docs/%E7%8B%AC%E7%AB%8BMCP%E4%B8%8ECLI)），可接入 **Claude Code**、**Codex**、**Antigravity**、**Claude Desktop** 等外部客户端——编辑器开启时自动桥接转发，**关闭编辑器后依然可独立直连数据库**。凭据经本地 `AES-256-GCM` Vault 跨进程加密隔离，默认只读且支持 MCP `elicitation` 写入确认，MCP 返回与配置文件中零密码暴露。
 - **可视化表结构设计器**：支持可视化新建/修改表结构，字段类型、主键、自增、索引、外键约束一站式图形化配置与 DDL 预检。
 - **智能模拟数据生成器**：支持基于字段语义的 Faker 模拟数据生成（42+ 内置语义类型），并支持配置 OpenAI/DeepSeek 协议通过 AI 生成逼真测试数据。
 - **高级数据分析网格**：基于 AG Grid 构建，支持行列数据转置 (Transpose)、透视模式 (Pivot)、单元格/行深度检视器、DBeaver 风格选择与在线数据编辑持久化。

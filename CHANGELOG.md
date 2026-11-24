@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.18] - 2026-11-24
+
+### 优化
+
+- **模拟数据自定义匹配公式扩展**：新增当前日期、当前日期时间、当前时间、Unix 时间戳、毫秒时间戳与行号。
+
+---
+
+### Improvements
+
+- **Expanded Mock Data Custom Matching Formulas**: Added Current Date, Current DateTime, Current Time, Unix Timestamp, Millisecond Timestamp, and Row Number.
+
 ## [0.9.17] - 2026-11-24
 
 ### 新增
@@ -667,16 +679,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Added
 
 - **SQL Notebook Cell Connection Locking**: Added support for locking individual code cells to their current database connection.
-
-## [0.8.34] - 2026-10-16
-
-### 优化
-
-- **自定义主题滚动条自适应**：自定义主题下滚动条根据主题自定义配置色适应，反差主题情况下整体性更强。
-
----
-
-### Improvements
-
-- **Custom Theme Scrollbar Adaptation**: Scrollbars now dynamically adapt to custom theme color configurations, providing enhanced visual unity in high-contrast theme setups.
 
