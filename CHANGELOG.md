@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.20] - 2026-11-26
+
+### 修复
+
+- **PostgreSQL 美元引号代码块执行与切分修复**：修复 PostgreSQL 函数定义、匿名代码块及 `$$...$$` 字符串在执行或切分时，被内部分号或空行错误拆断的问题。(#12)
+
+---
+
+### Bug Fixes
+
+- **PostgreSQL Dollar-Quoted Block Splitting Fix**: Fixed an issue where PostgreSQL function definitions, anonymous blocks, and `$$...$$` strings were incorrectly split by internal semicolons or blank lines during SQL execution or splitting. (#12)
+
 ## [0.9.19] - 2026-11-26
 
 ### 新增
@@ -667,16 +679,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Bug Fixes
 
 - **SQLite Comment-Prefixed SELECT Fix**: Fixed an issue where SQLite SELECT queries prefixed with SQL comments were misidentified as non-queries (showing 0 rows affected) and failed to paginate.
-
-## [0.8.36] - 2026-10-20
-
-### 优化
-
-- 部分图标以及文字菜单显示优化。
-
----
-
-### Improvements
-
-- Optimized display for selected icons and text menus.
 
