@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.19] - 2026-11-26
+
+### 新增
+
+- **本地文件直接查询（DuckDB）**：新建连接图库 File 分类新增支持 Parquet、CSV、JSON、Excel、Arrow 与 Avro 文件的直接选择打开。
+
+---
+
+### Added
+
+- **Direct Local File Querying (DuckDB)**: Added direct support in the New Connection gallery's File category to open Parquet, CSV, JSON, Excel, Arrow, and Avro files.
+
 ## [0.9.18] - 2026-11-24
 
 ### 优化
@@ -667,16 +679,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements
 
 - Optimized display for selected icons and text menus.
-
-## [0.8.35] - 2026-10-19
-
-### 新增
-
-- **SQL 笔记本单元格连接锁定**：支持将代码单元格锁定到当前数据库连接。
-
----
-
-### Added
-
-- **SQL Notebook Cell Connection Locking**: Added support for locking individual code cells to their current database connection.
 
