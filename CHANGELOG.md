@@ -6,6 +6,18 @@ This document logs significant changes, new features, and bug fixes for DMSQL.
 如果您在使用过程中遇到任何问题或建议，欢迎前往 [GitHub Issues](https://github.com/dmsql123/dmsql/issues) 提交反馈！  
 If you encounter any issues, bugs, or have feature requests, feel free to open an issue at [GitHub Issues](https://github.com/dmsql123/dmsql/issues).
 
+## [0.9.21] - 2026-11-28
+
+### 优化
+
+- **扩展启动速度与占用内存优化**：加载速度大幅提升（用时仅为之前的 5%~10%），数据库驱动、SSH / SOCKS 隧道与 SQL 格式化等组件改为按需加载（仅在实际连接或使用时载入），大幅缩短扩展启动耗时并降低常驻内存占用。
+
+---
+
+### Improvements
+
+- **Extension Startup Speed & Memory Optimization**: Substantially improved loading speed (startup time reduced to just 5%~10% of before) by switching database drivers, SSH/SOCKS tunnels, and SQL formatting modules to on-demand loading (loaded only when actually connecting or invoking features), significantly shortening activation time and lowering idle memory usage.
+
 ## [0.9.20] - 2026-11-26
 
 ### 修复
@@ -643,40 +655,4 @@ If you encounter any issues, bugs, or have feature requests, feel free to open a
 ### Improvements
 
 - **Dynamic Row Number Column Width**: Automatically widens the grid row index column based on the number of digits of the maximum loaded row.
-
-## [0.8.37] - 2026-10-22
-
-### 新增
-
-- **MySQL 9+ 向量列支持 (VECTOR)**：可视化建表与结构编辑新增 ector(n) 类型；结果集网格按浮点数组只读展示向量数据。
-- **MySQL JSON Duality View 支持**：资源树新增 JSON Duality View 独立分组，支持数据只读预览与基表映射权限检视。
-- **MySQL 9+ 程序库与四段版本识别**：新增程序库 (Libraries) 对象分组与定义查看；JavaScript 存储过程标注语言类型；支持解析展示 9.7.4+ 四段版本号。
-
-### 优化
-
-- **动态列类型识别与筛选优化**：无元数据类型的结果列按内容自适应推断数值与日期，修复数值/日期筛选退化为文本列表与跨列串值问题；筛选弹窗支持按 Esc 或点击外部自动收起。
-- **分页与单次查询上限逻辑优化**：`dmsql.maxRows` 默认调整为 0（不限制）；数据快速查看在启用分页时翻页 SQL 不再夹带单次最大行数限制，便于大表后翻。
-- **MySQL 执行计划树展开兼容**：优化 `EXPLAIN FORMAT=JSON` 解析，兼容带 `query_plan` 根节点的执行计划树展示。
-
-### 修复
-
-- **SQLite 注释前缀查询解析修复**：修复 SQLite 执行带注释前缀的 SELECT 语句被误识别为非查询（显示 0 行受影响）且无法分页的问题。
-
----
-
-### Added
-
-- **MySQL 9+ VECTOR Column Support**: Added ector(n) data type in visual table designer; result grid displays vector embeddings as read-only float arrays.
-- **MySQL JSON Duality View Support**: Added dedicated tree grouping for JSON Duality Views, supporting read-only previews and underlying base table operation inspection.
-- **MySQL 9+ Libraries & 4-Part Version Display**: Added Libraries object grouping in explorer; added language badge for JavaScript routines; supported 4-part version strings for MySQL 9.7.4+.
-
-### Improvements
-
-- **Dynamic Column Type Inference & Filter Polish**: Inferred numeric and datetime types from cell contents when column types are missing, fixing filter dropdown issues and column value leakage; filter panels now close on outside click or Esc.
-- **Pagination & Query Row Limit Polish**: Changed default `dmsql.maxRows` to 0 (unlimited); data preview pagination no longer appends maxRows to pagination SQL, enabling deep pagination on large tables.
-- **MySQL JSON Explain Plan Compatibility**: Enhanced `EXPLAIN FORMAT=JSON` parser to render plan trees for statements with `query_plan` roots.
-
-### Bug Fixes
-
-- **SQLite Comment-Prefixed SELECT Fix**: Fixed an issue where SQLite SELECT queries prefixed with SQL comments were misidentified as non-queries (showing 0 rows affected) and failed to paginate.
 
